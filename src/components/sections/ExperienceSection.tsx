@@ -16,7 +16,7 @@ const iconMap: Record<string, React.ElementType> = {
 
 export default function ExperienceSection() {
   return (
-    <section id="experience" className="relative py-20 sm:py-28 bg-cream overflow-hidden">
+    <section id="experience" className="relative py-20 sm:py-28 bg-offwhite overflow-hidden">
       {/* Subtle forest background effect */}
       <div className="absolute inset-0 opacity-[0.03]">
         <svg className="w-full h-full" viewBox="0 0 800 600" preserveAspectRatio="none">

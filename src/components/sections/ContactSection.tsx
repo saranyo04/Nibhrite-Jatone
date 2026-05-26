@@ -17,7 +17,7 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="relative py-20 sm:py-28 bg-cream paper-texture">
+    <section id="contact" className="relative py-20 sm:py-28 bg-offwhite paper-texture">
       <div className="alpana-border-top mb-16" />
 
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -68,7 +68,7 @@ export default function ContactSection() {
 
             <div className="space-y-5">
               {/* Address */}
-              <div className="flex items-start gap-4 p-4 rounded-xl bg-offwhite warm-shadow border border-warm-beige/40 hover:border-terracotta/20 transition-all duration-300">
+              <div className="flex items-start gap-4 p-4 rounded-xl bg-cream warm-shadow border border-warm-beige/40 hover:border-terracotta/20 transition-all duration-300">
                 <div className="w-10 h-10 rounded-lg bg-terracotta/10 flex items-center justify-center shrink-0">
                   <MapPin className="w-5 h-5 text-terracotta" />
                 </div>
@@ -83,7 +83,7 @@ export default function ContactSection() {
               </div>
 
               {/* Phone */}
-              <div className="flex items-start gap-4 p-4 rounded-xl bg-offwhite warm-shadow border border-warm-beige/40 hover:border-terracotta/20 transition-all duration-300">
+              <div className="flex items-start gap-4 p-4 rounded-xl bg-cream warm-shadow border border-warm-beige/40 hover:border-terracotta/20 transition-all duration-300">
                 <div className="w-10 h-10 rounded-lg bg-terracotta/10 flex items-center justify-center shrink-0">
                   <Phone className="w-5 h-5 text-terracotta" />
                 </div>
@@ -98,7 +98,7 @@ export default function ContactSection() {
               </div>
 
               {/* Email */}
-              <div className="flex items-start gap-4 p-4 rounded-xl bg-offwhite warm-shadow border border-warm-beige/40 hover:border-terracotta/20 transition-all duration-300">
+              <div className="flex items-start gap-4 p-4 rounded-xl bg-cream warm-shadow border border-warm-beige/40 hover:border-terracotta/20 transition-all duration-300">
                 <div className="w-10 h-10 rounded-lg bg-terracotta/10 flex items-center justify-center shrink-0">
                   <Mail className="w-5 h-5 text-terracotta" />
                 </div>
@@ -113,7 +113,7 @@ export default function ContactSection() {
               </div>
 
               {/* Hours */}
-              <div className="flex items-start gap-4 p-4 rounded-xl bg-offwhite warm-shadow border border-warm-beige/40 hover:border-terracotta/20 transition-all duration-300">
+              <div className="flex items-start gap-4 p-4 rounded-xl bg-cream warm-shadow border border-warm-beige/40 hover:border-terracotta/20 transition-all duration-300">
                 <div className="w-10 h-10 rounded-lg bg-terracotta/10 flex items-center justify-center shrink-0">
                   <Clock className="w-5 h-5 text-terracotta" />
                 </div>
@@ -165,7 +165,7 @@ export default function ContactSection() {
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <div className="bg-offwhite rounded-2xl p-6 sm:p-8 warm-shadow-lg border border-warm-beige/40">
+            <div className="bg-cream rounded-2xl p-6 sm:p-8 warm-shadow-lg border border-warm-beige/40">
               <h3
                 className="text-2xl font-light text-mud-brown mb-2"
                 style={{ fontFamily: 'var(--font-cormorant)' }}
@@ -193,7 +193,7 @@ export default function ContactSection() {
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     required
                     placeholder="Your name"
-                    className="w-full px-4 py-3 rounded-xl bg-cream border border-warm-beige/60 text-mud-brown placeholder:text-mud-brown/30 focus:border-terracotta/40 focus:ring-1 focus:ring-terracotta/20 outline-none transition-all duration-300"
+                    className="w-full px-4 py-3 rounded-xl bg-offwhite border border-warm-beige/60 text-mud-brown placeholder:text-mud-brown/30 focus:border-terracotta/40 focus:ring-1 focus:ring-terracotta/20 outline-none transition-all duration-300"
                     style={{ fontFamily: 'var(--font-nunito)' }}
                   />
                 </div>
@@ -211,7 +211,7 @@ export default function ContactSection() {
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     required
                     placeholder="your@email.com"
-                    className="w-full px-4 py-3 rounded-xl bg-cream border border-warm-beige/60 text-mud-brown placeholder:text-mud-brown/30 focus:border-terracotta/40 focus:ring-1 focus:ring-terracotta/20 outline-none transition-all duration-300"
+                    className="w-full px-4 py-3 rounded-xl bg-offwhite border border-warm-beige/60 text-mud-brown placeholder:text-mud-brown/30 focus:border-terracotta/40 focus:ring-1 focus:ring-terracotta/20 outline-none transition-all duration-300"
                     style={{ fontFamily: 'var(--font-nunito)' }}
                   />
                 </div>

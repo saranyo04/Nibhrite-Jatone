@@ -41,7 +41,7 @@ export default function ReviewsSection() {
   }, [emblaApi, onSelect]);
 
   return (
-    <section className="relative py-20 sm:py-28 bg-offwhite overflow-hidden">
+    <section className="relative py-20 sm:py-28 bg-cream overflow-hidden">
       {/* Subtle background texture */}
       <div className="absolute inset-0 paper-texture opacity-30" />
 

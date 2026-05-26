@@ -31,8 +31,8 @@ export default function Home() {
         <HomeSection />
         <AboutSection />
         <SectionDivider variant="forest" />
-        <ExperienceSection />
         <GallerySection />
+        <ExperienceSection />
         <SectionDivider variant="terracotta" />
         <ReviewsSection />
         <ContactSection />

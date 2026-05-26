@@ -25,7 +25,7 @@ export default function GallerySection() {
   }, []);
 
   return (
-    <section id="gallery" className="relative py-20 sm:py-28 bg-offwhite">
+    <section id="gallery" className="relative py-20 sm:py-28 bg-cream">
       <div className="absolute inset-0 paper-texture opacity-30" />
 
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
