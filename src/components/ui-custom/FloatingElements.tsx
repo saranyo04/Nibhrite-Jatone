@@ -39,9 +39,55 @@ function PaintStroke({ className }: { className?: string }) {
   );
 }
 
+function FloatingBaulSite({
+  className,
+  size = 50,
+  floatDuration = 14,
+  rotateRange = 3,
+  delay = 0,
+}: {
+  className?: string;
+  size?: number;
+  floatDuration?: number;
+  rotateRange?: number;
+  delay?: number;
+}) {
+  return (
+    <motion.div
+      className={`absolute pointer-events-none select-none ${className}`}
+      initial={{ opacity: 0 }}
+      animate={{
+        y: [0, -10, 0],
+        rotate: [0, rotateRange, -rotateRange, 0],
+        opacity: [0, 0.07, 0.07, 0],
+      }}
+      transition={{
+        duration: floatDuration,
+        delay,
+        repeat: Infinity,
+        ease: 'easeInOut',
+      }}
+      style={{ mixBlendMode: 'multiply' }}
+    >
+      <img
+        src="/images/baul-instrument.png"
+        alt=""
+        width={size}
+        height={Math.round(size * 1.5)}
+        className="opacity-[0.08]"
+        aria-hidden="true"
+      />
+    </motion.div>
+  );
+}
+
 export default function FloatingElements() {
   return (
     <div className="fixed inset-0 pointer-events-none z-[1] overflow-hidden">
+      {/* Floating Baul instruments — site-wide subtle presence */}
+      <FloatingBaulSite className="top-[35%] left-[2%] hidden xl:block" size={50} floatDuration={16} rotateRange={3} delay={1} />
+      <FloatingBaulSite className="top-[65%] right-[3%] hidden xl:block" size={45} floatDuration={18} rotateRange={-4} delay={5} />
+
       {/* Terracotta motifs */}
       <TerracottaMotif className="top-[20%] left-[3%] opacity-60 hidden lg:block" />
       <TerracottaMotif className="top-[45%] right-[4%] opacity-40 hidden lg:block" />

@@ -63,21 +63,44 @@ function BirdSilhouette({ delay, top }: { delay: number; top: string }) {
   );
 }
 
-function EktaraIllustration({ className }: { className?: string }) {
+function FloatingBaulInstrument({
+  className,
+  size = 90,
+  floatDuration = 10,
+  rotateRange = 4,
+  delay = 0,
+}: {
+  className?: string;
+  size?: number;
+  floatDuration?: number;
+  rotateRange?: number;
+  delay?: number;
+}) {
   return (
     <motion.div
-      className={`absolute pointer-events-none select-none opacity-[0.07] ${className}`}
-      animate={{ rotate: [0, 3, -3, 0], y: [0, -8, 0] }}
-      transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+      className={`absolute pointer-events-none select-none ${className}`}
+      initial={{ opacity: 0 }}
+      animate={{
+        y: [0, -12, 0],
+        rotate: [0, rotateRange, -rotateRange, 0],
+        opacity: [0, 0.12, 0.12, 0],
+      }}
+      transition={{
+        duration: floatDuration,
+        delay,
+        repeat: Infinity,
+        ease: 'easeInOut',
+      }}
+      style={{ mixBlendMode: 'multiply' }}
     >
-      <svg width="60" height="90" viewBox="0 0 60 90" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <ellipse cx="30" cy="75" rx="25" ry="12" fill="#A0522D" />
-        <rect x="27" y="15" width="6" height="60" rx="3" fill="#8B4513" />
-        <line x1="30" y1="15" x2="30" y2="5" stroke="#6B4F3A" strokeWidth="1" />
-        <circle cx="30" cy="4" r="3" fill="#C9A961" />
-        <line x1="28" y1="30" x2="32" y2="30" stroke="#C9A961" strokeWidth="0.5" />
-        <line x1="28" y1="45" x2="32" y2="45" stroke="#C9A961" strokeWidth="0.5" />
-      </svg>
+      <img
+        src="/images/baul-instrument.png"
+        alt=""
+        width={size}
+        height={Math.round(size * 1.5)}
+        className="opacity-[0.12]"
+        aria-hidden="true"
+      />
     </motion.div>
   );
 }
@@ -138,8 +161,11 @@ export default function HeroSection() {
       <BirdSilhouette delay={8} top="25%" />
       <BirdSilhouette delay={15} top="20%" />
 
-      <EktaraIllustration className="top-[20%] left-[8%] hidden lg:block" />
-      <EktaraIllustration className="top-[30%] right-[10%] hidden lg:block" />
+      {/* Floating Baul instruments — authentic Santiniketan vibe */}
+      <FloatingBaulInstrument className="top-[12%] left-[6%] hidden lg:block" size={80} floatDuration={12} rotateRange={3} delay={0} />
+      <FloatingBaulInstrument className="top-[28%] right-[7%] hidden lg:block" size={70} floatDuration={14} rotateRange={-4} delay={3} />
+      <FloatingBaulInstrument className="bottom-[30%] left-[12%] hidden xl:block" size={55} floatDuration={16} rotateRange={5} delay={6} />
+      <FloatingBaulInstrument className="top-[50%] right-[14%] hidden xl:block" size={60} floatDuration={11} rotateRange={-3} delay={2} />
 
       <AlpanaDecoration className="top-[15%] left-[5%] hidden xl:block" />
       <AlpanaDecoration className="bottom-[25%] right-[3%] hidden xl:block" />
