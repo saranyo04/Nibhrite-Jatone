@@ -9,8 +9,8 @@ export const siteConfig = {
 export const navItems = [
   { label: "Home", href: "#home" },
   { label: "About", href: "#about" },
-  { label: "Experience", href: "#experience" },
   { label: "Gallery", href: "#gallery" },
+  { label: "Experience", href: "#experience" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -43,27 +43,33 @@ export const homeCards = [
 
 export const reviews = [
   {
-    name: "Ananya S.",
-    location: "Kolkata",
-    text: "A hidden gem in Santiniketan. The peace and warmth we felt here was unlike any other stay. The food reminded me of my grandmother's kitchen.",
+    name: "Rïâ Bhättåchārjëē",
+    location: "Santiniketan",
+    text: "It's really nice and cozy. I stayed there for 2days with my 1.5yrs old baby and family. Not for a single time I have to worry for my baby's food. They cooked for him as per my instruction. We also had great time there. Rooms are clean and spacious. I'll definitely choose নিভৃতে যতনে in future also.",
     rating: 5,
   },
   {
-    name: "Rajdeep M.",
-    location: "Delhi",
-    text: "Walking through the Sonajhuri forest in the morning, returning to hot chai and homemade luchis — this is what healing feels like. Truly নিভৃতে যতনে.",
+    name: "Sougata Mondal",
+    location: "Santiniketan",
+    text: "With the real touch of Bolpur Santiniketan, such a homestay in a peaceful and soothing environment amidst nature and their hospitality is truly unparalleled. Would like to give them 10 out of 5 stars.",
     rating: 5,
   },
   {
-    name: "Priyanka D.",
-    location: "Bangalore",
-    text: "The hosts made us feel like family. The rooms are spotless, the surroundings magical. I didn't want to leave. Santiniketan captured my heart here.",
+    name: "Shilpa Acharjee",
+    location: "Santiniketan",
+    text: "One of the best places in my life is Santiniketan. This time, I stayed at a homestay called Nivrito Jatone. We had a wonderful experience there. The owner was very humble, and every member of their staff was extremely courteous and helpful. The next time I visit Santiniketan, I would love to stay there again.",
     rating: 5,
   },
   {
-    name: "Sourav B.",
-    location: "Mumbai",
-    text: "If you want to experience the real Santiniketan — the Baul music, the terracotta art, the red soil — stay here. It's not a hotel, it's a feeling.",
+    name: "Rajashree Sharma",
+    location: "Santiniketan",
+    text: "Just spent a wonderful time at this lovely homestay in Shantiniketan! The place is so beautiful and the homely atmosphere made me feel right at home. The food was great and the hosts were super caring. Feeling safe and relaxed throughout my stay. Highly recommend this place to anyone visiting Shantiniketan!",
+    rating: 5,
+  },
+  {
+    name: "Debdatta Mazumder",
+    location: "Santiniketan",
+    text: "We had a great experience here. The natural beauty around the homestay, the food, and the hospitality: everything is just outstanding. Also, I can't forget to mention that this homestay is highly baby-friendly!! 5 star is not enough to praise it. Will be looking forward to visit again.",
     rating: 5,
   },
 ];
@@ -140,7 +146,7 @@ export const galleryImages = [
 ];
 
 export const contactInfo = {
-  address: "Nibhṛite Jatone, Near Sonajhuri Forest, Santiniketan, Bolpur, West Bengal 731235",
+  address: "Nibhṛite Jatone, Kheledanga, Ballavpur, West Bengal 731236",
   phone: "+91 98765 43210",
   email: "stay@nibhritejatone.com",
   hours: "Check-in: 12:00 PM — Check-out: 11:00 AM",

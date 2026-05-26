@@ -130,7 +130,7 @@ export default function ContactSection() {
 
             {/* Directions Button */}
             <motion.a
-              href="https://maps.google.com/?q=Santiniketan+Bolpur"
+              href="https://maps.app.goo.gl/es4hNxSJEQhJpXfw9"
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ y: -2, boxShadow: '0 6px 25px rgba(160, 82, 45, 0.25)' }}
@@ -142,19 +142,19 @@ export default function ContactSection() {
               Get Directions
             </motion.a>
 
-            {/* Map Placeholder */}
+            {/* Google Map */}
             <div className="mt-6 rounded-xl overflow-hidden warm-shadow border border-warm-beige/40">
-              <div className="aspect-[16/9] bg-gradient-to-br from-warm-beige to-parchment flex items-center justify-center">
-                <div className="text-center">
-                  <MapPin className="w-8 h-8 text-terracotta/30 mx-auto mb-2" />
-                  <p className="text-sm text-mud-brown/40" style={{ fontFamily: 'var(--font-cormorant)' }}>
-                    Santiniketan, Bolpur
-                  </p>
-                  <p className="text-xs text-mud-brown/25" style={{ fontFamily: 'var(--font-nunito)' }}>
-                    West Bengal, India
-                  </p>
-                </div>
-              </div>
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d500!2d87.6465327!3d23.6785441!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f9dd00342cd225%3A0xd422acc6dcc8d26b!2sNibh%E1%B9%9Bite%20Jatone!5e0!3m2!1sen!2sin"
+                width="100%"
+                height="300"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Nibhṛite Jatone Location"
+                className="w-full"
+              />
             </div>
           </motion.div>
 
@@ -192,6 +192,7 @@ export default function ContactSection() {
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     required
+                    suppressHydrationWarning
                     placeholder="Your name"
                     className="w-full px-4 py-3 rounded-xl bg-offwhite border border-warm-beige/60 text-mud-brown placeholder:text-mud-brown/30 focus:border-terracotta/40 focus:ring-1 focus:ring-terracotta/20 outline-none transition-all duration-300"
                     style={{ fontFamily: 'var(--font-nunito)' }}
@@ -210,6 +211,7 @@ export default function ContactSection() {
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     required
+                    suppressHydrationWarning
                     placeholder="your@email.com"
                     className="w-full px-4 py-3 rounded-xl bg-offwhite border border-warm-beige/60 text-mud-brown placeholder:text-mud-brown/30 focus:border-terracotta/40 focus:ring-1 focus:ring-terracotta/20 outline-none transition-all duration-300"
                     style={{ fontFamily: 'var(--font-nunito)' }}
@@ -238,6 +240,7 @@ export default function ContactSection() {
                   type="submit"
                   whileHover={{ y: -2, boxShadow: '0 8px 30px rgba(160, 82, 45, 0.3)' }}
                   whileTap={{ scale: 0.97 }}
+                  suppressHydrationWarning
                   className="w-full flex items-center justify-center gap-2 px-6 py-3.5 bg-terracotta text-cream rounded-full text-sm font-medium hover:bg-terracotta-dark transition-colors duration-300 shadow-[0_4px_15px_rgba(160,82,45,0.2)]"
                   style={{ fontFamily: 'var(--font-nunito)' }}
                 >

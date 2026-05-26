@@ -12,7 +12,7 @@ function FloatingLeaf({ delay, left, duration }: { delay: number; left: string; 
       style={{ left, top: '-5%' }}
       initial={{ opacity: 0, y: -20, rotate: 0 }}
       animate={{
-        opacity: [0, 0.5, 0.4, 0],
+        opacity: [0, 0.8, 0.7, 0],
         y: ['0%', '110%'],
         rotate: [0, 180, 360],
         x: [0, 30, -20, 10],
@@ -24,13 +24,13 @@ function FloatingLeaf({ delay, left, duration }: { delay: number; left: string; 
         ease: 'linear',
       }}
     >
-      <svg width="20" height="28" viewBox="0 0 20 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg width="26" height="36" viewBox="0 0 20 28" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
           d="M10 0C10 0 18 8 18 16C18 20.4 14.4 24 10 24C5.6 24 2 20.4 2 16C2 8 10 0 10 0Z"
           fill="#556B2F"
-          fillOpacity="0.25"
+          fillOpacity="0.55"
         />
-        <line x1="10" y1="4" x2="10" y2="28" stroke="#556B2F" strokeOpacity="0.2" strokeWidth="0.5" />
+        <line x1="10" y1="4" x2="10" y2="28" stroke="#556B2F" strokeOpacity="0.45" strokeWidth="0.5" />
       </svg>
     </motion.div>
   );
@@ -157,12 +157,7 @@ export default function HeroSection() {
       <BirdSilhouette delay={8} top="25%" />
       <BirdSilhouette delay={15} top="20%" />
 
-      {/* Floating Baul instruments — authentic Santiniketan vibe */}
-      <FloatingBaulInstrument className="top-[14%] left-[3%]" size={120} floatDuration={12} rotateRange={3} delay={0} />
-      <FloatingBaulInstrument className="top-[18%] right-[4%]" size={100} floatDuration={14} rotateRange={-4} delay={3} />
-      <FloatingBaulInstrument className="bottom-[25%] left-[6%]" size={80} floatDuration={16} rotateRange={5} delay={6} />
-      <FloatingBaulInstrument className="top-[50%] right-[6%]" size={90} floatDuration={11} rotateRange={-3} delay={2} />
-
+      {/* Alpana decorations */}
       <AlpanaDecoration className="top-[15%] left-[5%] hidden xl:block" />
       <AlpanaDecoration className="bottom-[25%] right-[3%] hidden xl:block" />
 
@@ -200,6 +195,35 @@ export default function HeroSection() {
 
       {/* Main Content */}
       <div className="relative z-10 text-center px-4 sm:px-6 max-w-4xl mx-auto">
+        {/* Baul instrument — above the decorative line */}
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.2 }}
+          className="flex justify-center mb-6"
+        >
+          <motion.div
+            animate={{
+              y: [0, -10, 0],
+              rotate: [0, -4, 4, 0],
+            }}
+            transition={{
+              duration: 14,
+              repeat: Infinity,
+              ease: 'easeInOut',
+            }}
+            className="-scale-x-100"
+          >
+            <img
+              src="/images/baul-instrument.png"
+              alt="Baul instrument"
+              width={130}
+              height={195}
+              className="opacity-30"
+            />
+          </motion.div>
+        </motion.div>
+
         {/* Decorative top line */}
         <motion.div
           initial={{ scaleX: 0 }}
@@ -264,6 +288,7 @@ export default function HeroSection() {
             whileHover={{ y: -3, boxShadow: '0 8px 30px rgba(160, 82, 45, 0.25)' }}
             whileTap={{ scale: 0.97 }}
             onClick={() => handleScroll('about')}
+            suppressHydrationWarning
             className="px-8 py-3.5 bg-terracotta text-cream rounded-full text-sm font-medium tracking-wide hover:bg-terracotta-dark transition-colors duration-300 shadow-[0_4px_15px_rgba(160,82,45,0.2)]"
             style={{ fontFamily: 'var(--font-nunito)' }}
           >
@@ -273,6 +298,7 @@ export default function HeroSection() {
             whileHover={{ y: -3, boxShadow: '0 8px 25px rgba(107, 79, 58, 0.12)' }}
             whileTap={{ scale: 0.97 }}
             onClick={() => handleScroll('gallery')}
+            suppressHydrationWarning
             className="px-8 py-3.5 bg-transparent border-2 border-terracotta/40 text-terracotta rounded-full text-sm font-medium tracking-wide hover:border-terracotta hover:bg-terracotta/5 transition-all duration-300"
             style={{ fontFamily: 'var(--font-nunito)' }}
           >

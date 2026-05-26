@@ -82,10 +82,6 @@ function FloatingBaulSite({
 export default function FloatingElements() {
   return (
     <div className="fixed inset-0 pointer-events-none z-[1] overflow-hidden">
-      {/* Floating Baul instruments — site-wide subtle presence */}
-      <FloatingBaulSite className="top-[35%] left-[2%] hidden xl:block" size={50} floatDuration={16} rotateRange={3} delay={1} />
-      <FloatingBaulSite className="top-[65%] right-[3%] hidden xl:block" size={45} floatDuration={18} rotateRange={-4} delay={5} />
-
       {/* Terracotta motifs */}
       <TerracottaMotif className="top-[20%] left-[3%] opacity-60 hidden lg:block" />
       <TerracottaMotif className="top-[45%] right-[4%] opacity-40 hidden lg:block" />

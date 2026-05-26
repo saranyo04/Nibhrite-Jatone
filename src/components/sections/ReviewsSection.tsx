@@ -80,6 +80,7 @@ export default function ReviewsSection() {
           {/* Navigation Arrows */}
           <button
             onClick={scrollPrev}
+            suppressHydrationWarning
             className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-cream/90 border border-warm-beige/50 flex items-center justify-center shadow-sm hover:bg-terracotta/10 hover:border-terracotta/30 transition-all duration-300 -translate-x-1 sm:-translate-x-4"
             aria-label="Previous review"
           >
@@ -87,6 +88,7 @@ export default function ReviewsSection() {
           </button>
           <button
             onClick={scrollNext}
+            suppressHydrationWarning
             className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-cream/90 border border-warm-beige/50 flex items-center justify-center shadow-sm hover:bg-terracotta/10 hover:border-terracotta/30 transition-all duration-300 translate-x-1 sm:translate-x-4"
             aria-label="Next review"
           >
@@ -120,20 +122,12 @@ export default function ReviewsSection() {
                           {review.name.charAt(0)}
                         </span>
                       </div>
-                      <div>
-                        <p
-                          className="text-sm font-medium text-mud-brown"
-                          style={{ fontFamily: 'var(--font-cormorant)' }}
-                        >
-                          {review.name}
-                        </p>
-                        <p
-                          className="text-xs text-mud-brown/40"
-                          style={{ fontFamily: 'var(--font-nunito)' }}
-                        >
-                          {review.location}
-                        </p>
-                      </div>
+                      <p
+                        className="text-sm font-medium text-mud-brown"
+                        style={{ fontFamily: 'var(--font-cormorant)' }}
+                      >
+                        {review.name}
+                      </p>
                     </div>
                   </div>
                 </div>

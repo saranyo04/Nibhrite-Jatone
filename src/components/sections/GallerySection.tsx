@@ -69,6 +69,7 @@ export default function GallerySection() {
             <button
               key={category}
               onClick={() => setActiveCategory(category)}
+              suppressHydrationWarning
               className={`px-4 sm:px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                 activeCategory === category
                   ? 'bg-terracotta text-cream shadow-[0_4px_15px_rgba(160,82,45,0.25)]'

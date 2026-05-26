@@ -14,12 +14,11 @@ import LoadingScreen from '@/components/ui-custom/LoadingScreen';
 import CustomCursor from '@/components/ui-custom/CustomCursor';
 import FloatingElements from '@/components/ui-custom/FloatingElements';
 import ScrollToTop from '@/components/ui-custom/ScrollToTop';
-import MusicToggle from '@/components/ui-custom/MusicToggle';
 import SectionDivider from '@/components/ui-custom/SectionDivider';
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col bg-cream">
+    <div className="min-h-screen flex flex-col bg-cream overflow-x-hidden">
       <LoadingScreen />
       <CustomCursor />
       <FloatingElements />
@@ -40,7 +39,6 @@ export default function Home() {
 
       <Footer />
       <ScrollToTop />
-      <MusicToggle />
     </div>
   );
 }
