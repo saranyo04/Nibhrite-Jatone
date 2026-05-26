@@ -102,21 +102,28 @@ export default function FloatingElements() {
       <PaintStroke className="top-[80%] left-[10%] opacity-25 hidden xl:block" />
 
       {/* Ambient floating dots */}
-      {[...Array(6)].map((_, i) => (
+      {[
+        { left: 25, top: 40, duration: 7, delay: 0 },
+        { left: 50, top: 60, duration: 8, delay: 2 },
+        { left: 70, top: 30, duration: 6.5, delay: 1 },
+        { left: 35, top: 75, duration: 9, delay: 3.5 },
+        { left: 65, top: 50, duration: 7.5, delay: 0.5 },
+        { left: 45, top: 25, duration: 8.5, delay: 4 },
+      ].map((dot, i) => (
         <motion.div
           key={i}
           className="absolute w-1.5 h-1.5 rounded-full bg-dusty-gold/15"
           style={{
-            left: `${20 + Math.random() * 60}%`,
-            top: `${15 + Math.random() * 70}%`,
+            left: `${dot.left}%`,
+            top: `${dot.top}%`,
           }}
           animate={{
             y: [0, -20, 0],
             opacity: [0.1, 0.25, 0.1],
           }}
           transition={{
-            duration: 6 + Math.random() * 4,
-            delay: Math.random() * 5,
+            duration: dot.duration,
+            delay: dot.delay,
             repeat: Infinity,
             ease: 'easeInOut',
           }}

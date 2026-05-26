@@ -44,7 +44,7 @@ function BirdSilhouette({ delay, top }: { delay: number; top: string }) {
       initial={{ x: '-10%', opacity: 0 }}
       animate={{ x: '110%', opacity: [0, 0.35, 0.35, 0] }}
       transition={{
-        duration: 25 + Math.random() * 10,
+        duration: 28,
         delay,
         repeat: Infinity,
         ease: 'linear',
@@ -167,13 +167,22 @@ export default function HeroSection() {
       <AlpanaDecoration className="bottom-[25%] right-[3%] hidden xl:block" />
 
       {/* Soft ambient particles */}
-      {[...Array(8)].map((_, i) => (
+      {[
+        { left: 22, top: 35, duration: 5, delay: 0 },
+        { left: 48, top: 55, duration: 7, delay: 1.5 },
+        { left: 73, top: 28, duration: 6, delay: 3 },
+        { left: 35, top: 70, duration: 8, delay: 0.5 },
+        { left: 60, top: 42, duration: 5.5, delay: 2 },
+        { left: 82, top: 65, duration: 6.5, delay: 4 },
+        { left: 18, top: 50, duration: 7.5, delay: 1 },
+        { left: 55, top: 25, duration: 4.5, delay: 2.5 },
+      ].map((particle, i) => (
         <motion.div
           key={i}
           className="absolute w-1 h-1 rounded-full bg-dusty-gold/30"
           style={{
-            left: `${15 + Math.random() * 70}%`,
-            top: `${20 + Math.random() * 60}%`,
+            left: `${particle.left}%`,
+            top: `${particle.top}%`,
           }}
           animate={{
             opacity: [0.1, 0.4, 0.1],
@@ -181,8 +190,8 @@ export default function HeroSection() {
             y: [0, -15, 0],
           }}
           transition={{
-            duration: 4 + Math.random() * 4,
-            delay: Math.random() * 5,
+            duration: particle.duration,
+            delay: particle.delay,
             repeat: Infinity,
             ease: 'easeInOut',
           }}
