@@ -108,17 +108,8 @@ export default function HeroSection() {
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background image with gradient overlay - slow Ken Burns effect */}
-      <div className="absolute inset-0 overflow-hidden">
-        <motion.img
-          src="/images/hero-bg.jpg"
-          alt="Santiniketan morning landscape"
-          className="w-full h-full object-cover scale-110"
-          animate={{ scale: [1.1, 1.15, 1.1] }}
-          transition={{ duration: 30, repeat: Infinity, ease: 'easeInOut' }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-cream/40 via-cream/55 to-cream/95" />
-      </div>
+      {/* Warm Santiniketan morning gradient — earthy, peaceful, authentic */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#E8D5B7] via-[#F0E4CE] to-[#FAF7F2]" />
       
       {/* Simulated forest silhouette at bottom */}
       <div className="absolute bottom-0 left-0 right-0 h-1/3">
