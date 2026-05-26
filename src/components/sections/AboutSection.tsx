@@ -2,17 +2,8 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Trees, Utensils, Footprints, Heart, Home, Landmark, Quote, Star } from 'lucide-react';
-import { aboutFeatures, reviews } from '@/data/site-data';
-
-const featureIconMap: Record<string, React.ElementType> = {
-  trees: Trees,
-  utensils: Utensils,
-  footprints: Footprints,
-  heart: Heart,
-  home: Home,
-  landmark: Landmark,
-};
+import { Quote, Star } from 'lucide-react';
+import { reviews } from '@/data/site-data';
 
 export default function AboutSection() {
   return (
@@ -118,7 +109,7 @@ export default function AboutSection() {
             </p>
 
             {/* Bengali quote */}
-            <div className="border-l-2 border-terracotta/30 pl-4 mb-8">
+            <div className="border-l-2 border-terracotta/30 pl-4">
               <p
                 className="text-sm text-terracotta/50 italic"
                 style={{ fontFamily: 'var(--font-noto-bengali)' }}
@@ -131,33 +122,6 @@ export default function AboutSection() {
               >
                 Where time stands still, and peace returns
               </p>
-            </div>
-
-            {/* Features List */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {aboutFeatures.map((feature, i) => {
-                const Icon = featureIconMap[feature.icon] || Heart;
-                return (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.1, duration: 0.5 }}
-                    className="flex items-start gap-3 p-3 rounded-xl hover:bg-cream/50 transition-colors duration-300"
-                  >
-                    <div className="w-8 h-8 rounded-lg bg-terracotta/8 flex items-center justify-center shrink-0 mt-0.5">
-                      <Icon className="w-4 h-4 text-terracotta/70" />
-                    </div>
-                    <p
-                      className="text-sm text-mud-brown/70 leading-relaxed"
-                      style={{ fontFamily: 'var(--font-nunito)' }}
-                    >
-                      {feature.text}
-                    </p>
-                  </motion.div>
-                );
-              })}
             </div>
           </motion.div>
         </div>

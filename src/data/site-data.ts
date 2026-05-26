@@ -41,15 +41,6 @@ export const homeCards = [
   },
 ];
 
-export const aboutFeatures = [
-  { text: "Calm green surroundings with Sal and Sonajhuri trees", icon: "trees" },
-  { text: "Authentic Bengali home-cooked meals daily", icon: "utensils" },
-  { text: "Walking distance from Sonajhuri forest", icon: "footprints" },
-  { text: "Personalized care and warm hospitality", icon: "heart" },
-  { text: "Cozy, hygienic, and peaceful rooms", icon: "home" },
-  { text: "Close to Santiniketan's cultural landmarks", icon: "landmark" },
-];
-
 export const reviews = [
   {
     name: "Ananya S.",
