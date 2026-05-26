@@ -11,7 +11,7 @@ export default function GallerySection() {
   const [lightboxImage, setLightboxImage] = useState<typeof galleryImages[0] | null>(null);
 
   const filteredImages = activeCategory === 'All'
-    ? galleryImages
+    ? galleryImages.slice(0, 4)
     : galleryImages.filter(img => img.category === activeCategory);
 
   const openLightbox = useCallback((img: typeof galleryImages[0]) => {
