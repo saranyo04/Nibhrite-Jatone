@@ -65,7 +65,7 @@ function BirdSilhouette({ delay, top }: { delay: number; top: string }) {
 
 function FloatingBaulInstrument({
   className,
-  size = 90,
+  size = 120,
   floatDuration = 10,
   rotateRange = 4,
   delay = 0,
@@ -78,8 +78,7 @@ function FloatingBaulInstrument({
 }) {
   return (
     <motion.div
-      className={`absolute pointer-events-none select-none ${className}`}
-      initial={{ opacity: 0 }}
+      className={`absolute pointer-events-none select-none z-[5] ${className}`}
       animate={{
         y: [0, -14, 0],
         rotate: [0, rotateRange, -rotateRange, 0],
@@ -91,14 +90,14 @@ function FloatingBaulInstrument({
         ease: 'easeInOut',
       }}
     >
+      {/* White background removed via mix-blend-mode:multiply */}
       <img
         src="/images/baul-instrument.png"
         alt="Baul instrument"
         width={size}
         height={Math.round(size * 1.5)}
-        className="opacity-[0.18]"
+        className="opacity-30"
         style={{ mixBlendMode: 'multiply' }}
-        aria-hidden="true"
       />
     </motion.div>
   );
@@ -161,10 +160,10 @@ export default function HeroSection() {
       <BirdSilhouette delay={15} top="20%" />
 
       {/* Floating Baul instruments — authentic Santiniketan vibe */}
-      <FloatingBaulInstrument className="top-[10%] left-[4%]" size={90} floatDuration={12} rotateRange={3} delay={0} />
-      <FloatingBaulInstrument className="top-[22%] right-[5%]" size={75} floatDuration={14} rotateRange={-4} delay={3} />
-      <FloatingBaulInstrument className="bottom-[28%] left-[8%]" size={60} floatDuration={16} rotateRange={5} delay={6} />
-      <FloatingBaulInstrument className="top-[55%] right-[10%]" size={65} floatDuration={11} rotateRange={-3} delay={2} />
+      <FloatingBaulInstrument className="top-[8%] left-[3%]" size={120} floatDuration={12} rotateRange={3} delay={0} />
+      <FloatingBaulInstrument className="top-[18%] right-[4%]" size={100} floatDuration={14} rotateRange={-4} delay={3} />
+      <FloatingBaulInstrument className="bottom-[25%] left-[6%]" size={80} floatDuration={16} rotateRange={5} delay={6} />
+      <FloatingBaulInstrument className="top-[50%] right-[8%]" size={90} floatDuration={11} rotateRange={-3} delay={2} />
 
       <AlpanaDecoration className="top-[15%] left-[5%] hidden xl:block" />
       <AlpanaDecoration className="bottom-[25%] right-[3%] hidden xl:block" />
