@@ -73,7 +73,6 @@ function FloatingBaulSite({
         width={size}
         height={Math.round(size * 1.5)}
         className="opacity-[0.1]"
-        style={{ mixBlendMode: 'multiply' }}
         aria-hidden="true"
       />
     </motion.div>

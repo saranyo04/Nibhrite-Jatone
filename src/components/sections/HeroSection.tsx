@@ -90,14 +90,12 @@ function FloatingBaulInstrument({
         ease: 'easeInOut',
       }}
     >
-      {/* White background removed via mix-blend-mode:multiply */}
       <img
         src="/images/baul-instrument.png"
         alt="Baul instrument"
         width={size}
         height={Math.round(size * 1.5)}
         className="opacity-30"
-        style={{ mixBlendMode: 'multiply' }}
       />
     </motion.div>
   );
