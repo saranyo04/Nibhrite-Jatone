@@ -6,7 +6,7 @@ import { Quote } from 'lucide-react';
 
 export default function AboutSection() {
   return (
-    <section id="about" className="relative py-20 sm:py-28 bg-offwhite">
+    <section id="about" className="relative pt-20 pb-10 sm:pt-28 sm:pb-14 bg-offwhite">
       {/* Subtle background texture */}
       <div className="absolute inset-0 paper-texture opacity-50" />
 
@@ -35,7 +35,7 @@ export default function AboutSection() {
         </motion.div>
 
         {/* Split Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center mb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           {/* Left - Image */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
