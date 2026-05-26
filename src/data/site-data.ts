@@ -113,7 +113,7 @@ export const experiences = [
   },
 ];
 
-export const galleryCategories = ["All", "Interior", "Exterior", "Rooms", "Food & Drinks"] as const;
+export const galleryCategories = ["Interior", "Exterior", "Rooms", "Food & Drinks"] as const;
 export type GalleryCategory = typeof galleryCategories[number];
 
 export const galleryImages = [

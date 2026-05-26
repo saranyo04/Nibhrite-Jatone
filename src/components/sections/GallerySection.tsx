@@ -6,13 +6,11 @@ import { X, ZoomIn } from 'lucide-react';
 import { galleryImages, galleryCategories, type GalleryCategory } from '@/data/site-data';
 
 export default function GallerySection() {
-  const [activeCategory, setActiveCategory] = useState<GalleryCategory>('All');
+  const [activeCategory, setActiveCategory] = useState<GalleryCategory>('Interior');
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxImage, setLightboxImage] = useState<typeof galleryImages[0] | null>(null);
 
-  const filteredImages = activeCategory === 'All'
-    ? galleryImages.slice(0, 4)
-    : galleryImages.filter(img => img.category === activeCategory);
+  const filteredImages = galleryImages.filter(img => img.category === activeCategory);
 
   const openLightbox = useCallback((img: typeof galleryImages[0]) => {
     setLightboxImage(img);
