@@ -8,6 +8,7 @@ import AboutSection from '@/components/sections/AboutSection';
 import ExperienceSection from '@/components/sections/ExperienceSection';
 import GallerySection from '@/components/sections/GallerySection';
 import ContactSection from '@/components/sections/ContactSection';
+import ReviewsSection from '@/components/sections/ReviewsSection';
 import Footer from '@/components/sections/Footer';
 import LoadingScreen from '@/components/ui-custom/LoadingScreen';
 import CustomCursor from '@/components/ui-custom/CustomCursor';
@@ -33,6 +34,7 @@ export default function Home() {
         <ExperienceSection />
         <GallerySection />
         <SectionDivider variant="terracotta" />
+        <ReviewsSection />
         <ContactSection />
       </main>
 

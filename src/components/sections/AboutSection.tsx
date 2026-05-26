@@ -2,8 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Quote, Star } from 'lucide-react';
-import { reviews } from '@/data/site-data';
+import { Quote } from 'lucide-react';
 
 export default function AboutSection() {
   return (
@@ -125,77 +124,6 @@ export default function AboutSection() {
             </div>
           </motion.div>
         </div>
-
-        {/* Reviews Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-50px' }}
-          transition={{ duration: 0.8 }}
-          className="mb-8"
-        >
-          <div className="text-center mb-10">
-            <p
-              className="text-sm text-terracotta/60 tracking-[0.3em] uppercase mb-3"
-              style={{ fontFamily: 'var(--font-nunito)' }}
-            >
-              Guest Stories
-            </p>
-            <h3
-              className="text-2xl sm:text-3xl font-light text-mud-brown"
-              style={{ fontFamily: 'var(--font-cormorant)' }}
-            >
-              Words from Our <span className="font-semibold text-terracotta">Guests</span>
-            </h3>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {reviews.map((review, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.15, duration: 0.6 }}
-                className="bg-cream/80 rounded-2xl p-6 sm:p-8 warm-shadow border border-warm-beige/40 relative"
-              >
-                <Quote className="absolute top-4 right-4 w-8 h-8 text-terracotta/10" />
-                <div className="flex gap-1 mb-4">
-                  {[...Array(review.rating)].map((_, j) => (
-                    <Star key={j} className="w-4 h-4 fill-dusty-gold text-dusty-gold" />
-                  ))}
-                </div>
-                <p
-                  className="text-sm text-mud-brown/70 leading-relaxed mb-4 italic"
-                  style={{ fontFamily: 'var(--font-nunito)' }}
-                >
-                  &ldquo;{review.text}&rdquo;
-                </p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-terracotta/10 flex items-center justify-center">
-                    <span className="text-sm font-semibold text-terracotta" style={{ fontFamily: 'var(--font-cormorant)' }}>
-                      {review.name.charAt(0)}
-                    </span>
-                  </div>
-                  <div>
-                    <p
-                      className="text-sm font-medium text-mud-brown"
-                      style={{ fontFamily: 'var(--font-cormorant)' }}
-                    >
-                      {review.name}
-                    </p>
-                    <p
-                      className="text-xs text-mud-brown/40"
-                      style={{ fontFamily: 'var(--font-nunito)' }}
-                    >
-                      {review.location}
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
       </div>
     </section>
   );
