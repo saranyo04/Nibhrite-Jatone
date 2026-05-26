@@ -36,7 +36,45 @@ export default function HomeSection() {
       <div className="alpana-border-top mb-16" />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Feature Cards — shown first */}
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-16"
+        >
+          <p
+            className="text-sm text-terracotta/60 tracking-[0.3em] uppercase mb-3"
+            style={{ fontFamily: 'var(--font-nunito)' }}
+          >
+            Welcome to
+          </p>
+          <h2
+            className="text-3xl sm:text-4xl md:text-5xl font-light text-mud-brown mb-4"
+            style={{ fontFamily: 'var(--font-cormorant)' }}
+          >
+            A <span className="font-semibold text-terracotta">Soulful</span> Retreat
+          </h2>
+          <div className="w-16 h-[1px] bg-terracotta/30 mx-auto mb-6" />
+          <p
+            className="text-base sm:text-lg text-mud-brown/60 max-w-2xl mx-auto leading-relaxed"
+            style={{ fontFamily: 'var(--font-nunito)' }}
+          >
+            Nestled in the serene embrace of Santiniketan&apos;s red soil and golden forests, 
+            our homestay offers more than a room — it offers a feeling. A place where time 
+            slows down, where the breeze carries Tagore&apos;s poetry, and every moment feels 
+            like coming home.
+          </p>
+          <p
+            className="text-base text-terracotta/50 mt-4 italic"
+            style={{ fontFamily: 'var(--font-noto-bengali)' }}
+          >
+            নিভৃতে যতনে, প্রকৃতির কোলে শান্তির আশ্রয়
+          </p>
+        </motion.div>
+
+        {/* Feature Cards */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -77,44 +115,6 @@ export default function HomeSection() {
               </motion.div>
             );
           })}
-        </motion.div>
-
-        {/* Welcome Text — below the cards */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.8 }}
-          className="text-center mt-16"
-        >
-          <p
-            className="text-sm text-terracotta/60 tracking-[0.3em] uppercase mb-3"
-            style={{ fontFamily: 'var(--font-nunito)' }}
-          >
-            Welcome to
-          </p>
-          <h2
-            className="text-3xl sm:text-4xl md:text-5xl font-light text-mud-brown mb-4"
-            style={{ fontFamily: 'var(--font-cormorant)' }}
-          >
-            A <span className="font-semibold text-terracotta">Soulful</span> Retreat
-          </h2>
-          <div className="w-16 h-[1px] bg-terracotta/30 mx-auto mb-6" />
-          <p
-            className="text-base sm:text-lg text-mud-brown/60 max-w-2xl mx-auto leading-relaxed"
-            style={{ fontFamily: 'var(--font-nunito)' }}
-          >
-            Nestled in the serene embrace of Santiniketan&apos;s red soil and golden forests, 
-            our homestay offers more than a room — it offers a feeling. A place where time 
-            slows down, where the breeze carries Tagore&apos;s poetry, and every moment feels 
-            like coming home.
-          </p>
-          <p
-            className="text-base text-terracotta/50 mt-4 italic"
-            style={{ fontFamily: 'var(--font-noto-bengali)' }}
-          >
-            নিভৃতে যতনে, প্রকৃতির কোলে শান্তির আশ্রয়
-          </p>
         </motion.div>
       </div>
 
