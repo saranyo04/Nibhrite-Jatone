@@ -161,7 +161,7 @@ export default function HeroSection() {
       <FloatingBaulInstrument className="top-[14%] left-[3%]" size={120} floatDuration={12} rotateRange={3} delay={0} />
       <FloatingBaulInstrument className="top-[18%] right-[4%]" size={100} floatDuration={14} rotateRange={-4} delay={3} />
       <FloatingBaulInstrument className="bottom-[25%] left-[6%]" size={80} floatDuration={16} rotateRange={5} delay={6} />
-      <FloatingBaulInstrument className="top-[50%] right-[8%]" size={90} floatDuration={11} rotateRange={-3} delay={2} />
+      <FloatingBaulInstrument className="top-[50%] right-[6%]" size={90} floatDuration={11} rotateRange={-3} delay={2} />
 
       <AlpanaDecoration className="top-[15%] left-[5%] hidden xl:block" />
       <AlpanaDecoration className="bottom-[25%] right-[3%] hidden xl:block" />
