@@ -2,7 +2,16 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Quote } from 'lucide-react';
+import { Quote, TreePine, Sun, Home, Music, Heart, Leaf } from 'lucide-react';
+
+const highlights = [
+  { icon: TreePine, label: 'Sal & Sonajhuri Groves', bengali: 'শাল ও সোনাঝুড়ি' },
+  { icon: Sun, label: 'Morning Chai in Nature', bengali: 'প্রকৃতির কোলে চা' },
+  { icon: Home, label: 'Cozy Hygienic Rooms', bengali: 'আরামদায়ক ঘর' },
+  { icon: Music, label: 'Baul Music Heritage', bengali: 'বাউল সংগীত' },
+  { icon: Heart, label: 'Warm Homely Care', bengali: 'উষ্ণ যত্ন' },
+  { icon: Leaf, label: 'Red Soil & Open Skies', bengali: 'লাল মাটি ও আকাশ' },
+];
 
 export default function AboutSection() {
   return (
@@ -34,9 +43,9 @@ export default function AboutSection() {
           <div className="w-16 h-[1px] bg-terracotta/30 mx-auto" />
         </motion.div>
 
-        {/* Split Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center mb-20">
-          {/* Left - Image */}
+        {/* Split Layout — Image + Text */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start mb-16">
+          {/* Left — Image with decorative elements */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -79,9 +88,36 @@ export default function AboutSection() {
                 Peace of mind in nature&apos;s embrace
               </p>
             </motion.div>
+
+            {/* Second small image — stacked collage effect */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="mt-8 relative rounded-2xl overflow-hidden warm-shadow group"
+            >
+              <div className="aspect-[16/9] overflow-hidden">
+                <img
+                  src="/images/gallery/exterior/exterior-2.jpg"
+                  alt="Garden path through Sal trees"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  loading="lazy"
+                />
+              </div>
+              {/* Overlay tag */}
+              <div className="absolute bottom-3 left-3 bg-cream/90 backdrop-blur-sm rounded-lg px-3 py-1.5 shadow-sm">
+                <p
+                  className="text-[10px] text-terracotta/70 tracking-wider uppercase"
+                  style={{ fontFamily: 'var(--font-nunito)' }}
+                >
+                  শান্তির আশ্রয়
+                </p>
+              </div>
+            </motion.div>
           </motion.div>
 
-          {/* Right - Text Content */}
+          {/* Right — Text Content + Highlights */}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -89,7 +125,7 @@ export default function AboutSection() {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <p
-              className="text-base sm:text-lg text-mud-brown/70 leading-relaxed mb-6"
+              className="text-base sm:text-lg text-mud-brown/70 leading-relaxed mb-5"
               style={{ fontFamily: 'var(--font-nunito)' }}
             >
               At <span className="text-terracotta font-semibold" style={{ fontFamily: 'var(--font-cormorant)' }}>Nibhṛite Jatone</span>, 
@@ -98,7 +134,7 @@ export default function AboutSection() {
               sanctuary where the noise of the world fades and the music of nature takes over.
             </p>
             <p
-              className="text-base text-mud-brown/60 leading-relaxed mb-6"
+              className="text-base text-mud-brown/60 leading-relaxed mb-5"
               style={{ fontFamily: 'var(--font-nunito)' }}
             >
               Wake up to the songs of birds, sip morning tea under Sal trees, walk to the 
@@ -108,7 +144,7 @@ export default function AboutSection() {
             </p>
 
             {/* Bengali quote */}
-            <div className="border-l-2 border-terracotta/30 pl-4">
+            <div className="border-l-2 border-terracotta/30 pl-4 mb-8">
               <p
                 className="text-sm text-terracotta/50 italic"
                 style={{ fontFamily: 'var(--font-noto-bengali)' }}
@@ -120,6 +156,58 @@ export default function AboutSection() {
                 style={{ fontFamily: 'var(--font-nunito)' }}
               >
                 Where time stands still, and peace returns
+              </p>
+            </div>
+
+            {/* Highlight pills */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-8">
+              {highlights.map((item, i) => {
+                const Icon = item.icon;
+                return (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.08, duration: 0.5 }}
+                    className="flex items-center gap-2.5 bg-cream/80 rounded-xl px-3 py-2.5 border border-warm-beige/40 hover:border-terracotta/20 hover:bg-terracotta/5 transition-all duration-300 group"
+                  >
+                    <div className="w-8 h-8 rounded-lg bg-terracotta/8 flex items-center justify-center shrink-0 group-hover:bg-terracotta/12 transition-colors duration-300">
+                      <Icon className="w-4 h-4 text-terracotta/60" />
+                    </div>
+                    <div className="min-w-0">
+                      <p
+                        className="text-xs font-medium text-mud-brown/80 leading-tight truncate"
+                        style={{ fontFamily: 'var(--font-nunito)' }}
+                      >
+                        {item.label}
+                      </p>
+                      <p
+                        className="text-[9px] text-terracotta/40 truncate"
+                        style={{ fontFamily: 'var(--font-noto-bengali)' }}
+                      >
+                        {item.bengali}
+                      </p>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+
+            {/* Tagore quote block */}
+            <div className="relative bg-cream/60 rounded-2xl p-5 border border-warm-beige/30">
+              <Quote className="absolute top-3 right-3 w-6 h-6 text-terracotta/10" />
+              <p
+                className="text-sm text-terracotta/50 italic leading-relaxed mb-2"
+                style={{ fontFamily: 'var(--font-noto-bengali)' }}
+              >
+                যদি তোর ডাক শুনে কেউ না আসে, তবে একলা চলো রে
+              </p>
+              <p
+                className="text-xs text-mud-brown/40"
+                style={{ fontFamily: 'var(--font-nunito)' }}
+              >
+                &ldquo;If no one responds to your call, then walk alone&rdquo; — Rabindranath Tagore
               </p>
             </div>
           </motion.div>
