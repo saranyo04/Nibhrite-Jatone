@@ -59,7 +59,6 @@ function FloatingBaulSite({
       animate={{
         y: [0, -10, 0],
         rotate: [0, rotateRange, -rotateRange, 0],
-        opacity: [0, 0.07, 0.07, 0],
       }}
       transition={{
         duration: floatDuration,
@@ -67,14 +66,14 @@ function FloatingBaulSite({
         repeat: Infinity,
         ease: 'easeInOut',
       }}
-      style={{ mixBlendMode: 'multiply' }}
     >
       <img
         src="/images/baul-instrument.png"
-        alt=""
+        alt="Baul instrument"
         width={size}
         height={Math.round(size * 1.5)}
-        className="opacity-[0.08]"
+        className="opacity-[0.1]"
+        style={{ mixBlendMode: 'multiply' }}
         aria-hidden="true"
       />
     </motion.div>
