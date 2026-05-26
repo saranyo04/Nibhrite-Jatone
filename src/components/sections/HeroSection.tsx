@@ -158,7 +158,7 @@ export default function HeroSection() {
       <BirdSilhouette delay={15} top="20%" />
 
       {/* Floating Baul instruments — authentic Santiniketan vibe */}
-      <FloatingBaulInstrument className="top-[18%] left-[3%]" size={120} floatDuration={12} rotateRange={3} delay={0} />
+      <FloatingBaulInstrument className="top-[14%] left-[3%]" size={120} floatDuration={12} rotateRange={3} delay={0} />
       <FloatingBaulInstrument className="top-[18%] right-[4%]" size={100} floatDuration={14} rotateRange={-4} delay={3} />
       <FloatingBaulInstrument className="bottom-[25%] left-[6%]" size={80} floatDuration={16} rotateRange={5} delay={6} />
       <FloatingBaulInstrument className="top-[50%] right-[8%]" size={90} floatDuration={11} rotateRange={-3} delay={2} />
