@@ -7,6 +7,8 @@ import { siteConfig } from '@/data/site-data';
 export default function HomeSection() {
   return (
     <section id="home-content" className="relative py-16 sm:py-20 lg:py-28 bg-cream paper-texture">
+      <div className="alpana-border-top mb-10 sm:mb-16" />
+
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
@@ -46,6 +48,8 @@ export default function HomeSection() {
           </p>
         </motion.div>
       </div>
+
+      <div className="alpana-border-bottom mt-10 sm:mt-16" />
     </section>
   );
 }
