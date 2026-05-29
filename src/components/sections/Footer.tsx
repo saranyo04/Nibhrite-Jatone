@@ -14,19 +14,19 @@ export default function Footer() {
       {/* Single smooth wave — offwhite from Contact section gently curves down into dark footer */}
       <div className="relative w-full bg-gradient-to-b from-mud-brown to-[#4A3728]">
         <svg
-          viewBox="0 0 1440 80"
+          viewBox="0 0 1440 120"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="w-full h-[50px] sm:h-[60px] md:h-[70px] lg:h-[80px] block"
+          className="w-full h-[70px] sm:h-[90px] md:h-[110px] lg:h-[120px] block"
           preserveAspectRatio="none"
         >
           <path
-            d="M0 0H1440V52C1320 72 1200 80 1080 76C960 72 840 52 720 44C600 36 480 44 360 56C240 68 120 76 0 64V0Z"
+            d="M0 0H1440V68C1320 98 1200 112 1080 108C960 104 840 78 720 66C600 54 480 60 360 76C240 92 120 108 0 92V0Z"
             fill="#FAF7F2"
           />
         </svg>
 
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-2 pb-8">
           {/* 3-column grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-10 mb-10 sm:mb-12">
             {/* Column 1 - Brand */}
