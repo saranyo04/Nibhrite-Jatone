@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
 import { Instagram, Facebook, Mail, Heart } from 'lucide-react';
 import Link from 'next/link';
 import { navItems, siteConfig, footerQuote, contactInfo } from '@/data/site-data';
@@ -11,22 +10,22 @@ export default function Footer() {
 
   return (
     <footer className="relative text-cream/70">
-      {/* Single smooth wave — offwhite from Contact section gently curves down into dark footer */}
+      {/* Subtle mini wave — offwhite gently undulates into the dark footer, replacing the straight line */}
       <div className="relative w-full bg-gradient-to-b from-mud-brown to-[#4A3728]">
         <svg
-          viewBox="0 0 1440 120"
+          viewBox="0 0 1440 40"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="w-full h-[70px] sm:h-[90px] md:h-[110px] lg:h-[120px] block"
+          className="w-full h-[30px] sm:h-[35px] md:h-[40px] block"
           preserveAspectRatio="none"
         >
           <path
-            d="M0 0H1440V68C1320 98 1200 112 1080 108C960 104 840 78 720 66C600 54 480 60 360 76C240 92 120 108 0 92V0Z"
+            d="M0 0H1440V18C1320 32 1200 8 1080 18C960 28 840 8 720 18C600 28 480 8 360 18C240 28 120 8 0 22V0Z"
             fill="#FAF7F2"
           />
         </svg>
 
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-2 pb-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-8">
           {/* 3-column grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-10 mb-10 sm:mb-12">
             {/* Column 1 - Brand */}

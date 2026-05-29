@@ -372,7 +372,6 @@ export default function ContactSection() {
         </div>
       </div>
 
-      <div className="alpana-border-bottom mt-10 sm:mt-14 lg:mt-16" />
     </section>
   );
 }
