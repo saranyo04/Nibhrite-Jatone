@@ -372,7 +372,21 @@ export default function ContactSection() {
         </div>
       </div>
 
-      <div className="alpana-border-bottom mt-10 sm:mt-14 lg:mt-16" />
+      {/* Wavy transition into footer — replaces the straight line */}
+      <div className="w-full mt-10 sm:mt-14 lg:mt-16">
+        <svg
+          viewBox="0 0 1440 40"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="w-full h-[30px] sm:h-[35px] md:h-[40px] block"
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M0 0H1440V12C1320 28 1200 4 1080 18C960 32 840 4 720 18C600 32 480 4 360 18C240 32 120 4 0 18V0Z"
+            fill="#FAF7F2"
+          />
+        </svg>
+      </div>
     </section>
   );
 }
