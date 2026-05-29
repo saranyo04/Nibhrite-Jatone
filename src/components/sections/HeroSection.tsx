@@ -176,13 +176,12 @@ export default function HeroSection() {
             }}
             className="-scale-x-100"
           >
-            {/* Mobile: 90×135, Desktop (sm+): 130×195 */}
             <img
               src="/images/baul-instrument.png"
               alt="Baul instrument"
               width={130}
               height={195}
-              className="opacity-30 w-[90px] h-[135px] sm:w-[130px] sm:h-[195px]"
+              className="opacity-30"
             />
           </motion.div>
         </motion.div>
