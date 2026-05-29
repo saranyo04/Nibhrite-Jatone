@@ -9,8 +9,25 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative text-cream/70 bg-gradient-to-b from-mud-brown to-[#4A3728]">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-10 pb-8">
+    <footer className="relative text-cream/70">
+      {/* Little wavy curve — offwhite shape overlaps the footer top, creating a visible curvy transition */}
+      <div className="absolute top-0 left-0 w-full overflow-hidden leading-none -translate-y-[calc(100%-2px)]">
+        <svg
+          viewBox="0 0 1440 40"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="w-full h-auto block"
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M0 40L48 36C96 32 192 24 288 28C384 32 480 40 576 36C672 32 768 20 864 24C960 28 1056 36 1152 32C1248 28 1344 20 1392 16L1440 12V40H1392C1344 40 1248 40 1152 40C1056 40 960 40 864 40C768 40 672 40 576 40C480 40 384 40 288 40C192 40 96 40 48 40H0Z"
+            fill="#FAF7F2"
+          />
+        </svg>
+      </div>
+
+      <div className="bg-gradient-to-b from-mud-brown to-[#4A3728]">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 pb-8">
           {/* 3-column grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-10 mb-10 sm:mb-12">
             {/* Column 1 - Brand */}
@@ -122,6 +139,7 @@ export default function Footer() {
             </p>
           </div>
         </div>
+      </div>
     </footer>
   );
 }
