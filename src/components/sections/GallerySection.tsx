@@ -2,15 +2,22 @@
 
 import React, { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ZoomIn } from 'lucide-react';
-import { galleryImages, galleryCategories, type GalleryCategory } from '@/data/site-data';
+import { X, ZoomIn, ArrowRight } from 'lucide-react';
+import Link from 'next/link';
+import { galleryImages, galleryCategories, galleryPreviewLimits, type GalleryCategory } from '@/data/site-data';
 
 export default function GallerySection() {
-  const [activeCategory, setActiveCategory] = useState<GalleryCategory>('Interior');
+  const [activeCategory, setActiveCategory] = useState<GalleryCategory>('All');
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxImage, setLightboxImage] = useState<typeof galleryImages[0] | null>(null);
 
-  const filteredImages = galleryImages.filter(img => img.category === activeCategory);
+  const filteredImages =
+    activeCategory === 'All'
+      ? galleryImages
+      : galleryImages.filter((img) => img.category === activeCategory);
+
+  const previewLimit = galleryPreviewLimits[activeCategory];
+  const previewImages = filteredImages.slice(0, previewLimit);
 
   const openLightbox = useCallback((img: typeof galleryImages[0]) => {
     setLightboxImage(img);
@@ -23,7 +30,7 @@ export default function GallerySection() {
   }, []);
 
   return (
-    <section id="gallery" className="relative py-20 sm:py-28 bg-cream">
+    <section id="gallery" className="relative py-16 sm:py-20 lg:py-28 bg-cream">
       <div className="absolute inset-0 paper-texture opacity-30" />
 
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -63,17 +70,17 @@ export default function GallerySection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-10"
+          className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8 sm:mb-10"
         >
           {galleryCategories.map((category) => (
             <button
               key={category}
               onClick={() => setActiveCategory(category)}
               suppressHydrationWarning
-              className={`px-4 sm:px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+              className={`px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm rounded-full transition-all duration-300 ${
                 activeCategory === category
-                  ? 'bg-terracotta text-cream shadow-[0_4px_15px_rgba(160,82,45,0.25)]'
-                  : 'bg-cream text-mud-brown/60 hover:bg-warm-beige/60 hover:text-terracotta border border-warm-beige/60'
+                  ? 'bg-terracotta text-cream shadow'
+                  : 'bg-cream text-mud-brown/60 border border-warm-beige/60'
               }`}
               style={{ fontFamily: 'var(--font-nunito)' }}
             >
@@ -85,7 +92,7 @@ export default function GallerySection() {
         {/* Masonry Grid */}
         <div className="masonry-grid">
           <AnimatePresence mode="popLayout">
-            {filteredImages.map((img, i) => (
+            {previewImages.map((img, i) => (
               <motion.div
                 key={img.id}
                 layout
@@ -93,7 +100,7 @@ export default function GallerySection() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.5, delay: i * 0.05 }}
-                className="group relative rounded-xl overflow-hidden cursor-pointer warm-shadow border border-warm-beige/30 hover:border-terracotta/20 transition-all duration-500"
+                className="group relative rounded-xl overflow-hidden cursor-pointer warm-shadow"
                 onClick={() => openLightbox(img)}
               >
                 <div
@@ -130,7 +137,7 @@ export default function GallerySection() {
                   />
                 </div>
 
-                {/* Hover overlay */}
+                {/* Hover overlay with alt text */}
                 <div className="absolute inset-0 bg-gradient-to-t from-mud-brown/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end">
                   <div className="p-4 w-full">
                     <p
@@ -142,21 +149,46 @@ export default function GallerySection() {
                   </div>
                 </div>
 
-                {/* Zoom icon */}
-                <div className="absolute top-3 right-3 w-8 h-8 rounded-lg bg-cream/80 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                {/* Zoom icon - hidden on mobile */}
+                <div className="absolute top-3 right-3 w-8 h-8 rounded-lg bg-cream/80 backdrop-blur-sm hidden sm:flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <ZoomIn className="w-4 h-4 text-terracotta" />
                 </div>
 
-                {/* Category badge */}
-                <div className="absolute top-3 left-3">
-                  <span className="px-2 py-1 text-[10px] rounded-full bg-cream/80 backdrop-blur-sm text-terracotta/70 font-medium" style={{ fontFamily: 'var(--font-nunito)' }}>
-                    {img.category}
-                  </span>
-                </div>
+                {/* Category badge - only show when activeCategory === 'All' */}
+                {activeCategory === 'All' && (
+                  <div className="absolute top-3 left-3">
+                    <span
+                      className="px-2 py-1 text-[10px] rounded-full bg-cream/80 backdrop-blur-sm text-terracotta/70 font-medium"
+                      style={{ fontFamily: 'var(--font-nunito)' }}
+                    >
+                      {img.category}
+                    </span>
+                  </div>
+                )}
               </motion.div>
             ))}
           </AnimatePresence>
         </div>
+
+        {/* Show More / View Full Gallery */}
+        {filteredImages.length > previewLimit && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="flex justify-center mt-8 sm:mt-10"
+          >
+            <Link
+              href={`/gallery?category=${activeCategory === 'All' ? 'all' : activeCategory.toLowerCase()}`}
+              className="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-terracotta text-cream text-xs sm:text-sm font-medium shadow hover:bg-terracotta/90 transition-colors duration-300"
+              style={{ fontFamily: 'var(--font-nunito)' }}
+            >
+              View Full Gallery
+              <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+            </Link>
+          </motion.div>
+        )}
       </div>
 
       {/* Lightbox */}
@@ -167,7 +199,7 @@ export default function GallerySection() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[60] bg-mud-brown/90 backdrop-blur-sm flex items-center justify-center p-4"
+            className="fixed inset-0 z-[60] bg-mud-brown/90 backdrop-blur-sm flex items-center justify-center p-2 sm:p-4"
             onClick={closeLightbox}
           >
             <motion.div
@@ -183,18 +215,28 @@ export default function GallerySection() {
                 alt={lightboxImage.alt}
                 className="w-full h-full object-contain"
               />
+
+              {/* Close button */}
               <button
                 onClick={closeLightbox}
-                className="absolute top-4 right-4 w-10 h-10 rounded-full bg-cream/90 flex items-center justify-center hover:bg-cream transition-colors shadow-lg"
+                className="absolute top-3 right-3 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-cream/90 flex items-center justify-center hover:bg-cream transition-colors shadow-lg"
                 aria-label="Close lightbox"
               >
-                <X className="w-5 h-5 text-mud-brown" />
+                <X className="w-4 h-4 sm:w-5 sm:h-5 text-mud-brown" />
               </button>
+
+              {/* Caption bar */}
               <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-mud-brown/80 to-transparent">
-                <p className="text-sm text-cream/90" style={{ fontFamily: 'var(--font-nunito)' }}>
+                <p
+                  className="text-sm text-cream/90"
+                  style={{ fontFamily: 'var(--font-nunito)' }}
+                >
                   {lightboxImage.alt}
                 </p>
-                <p className="text-xs text-cream/50 mt-1" style={{ fontFamily: 'var(--font-nunito)' }}>
+                <p
+                  className="text-xs text-cream/50 mt-1"
+                  style={{ fontFamily: 'var(--font-nunito)' }}
+                >
                   {lightboxImage.category}
                 </p>
               </div>

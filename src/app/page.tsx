@@ -14,6 +14,7 @@ import LoadingScreen from '@/components/ui-custom/LoadingScreen';
 import CustomCursor from '@/components/ui-custom/CustomCursor';
 import FloatingElements from '@/components/ui-custom/FloatingElements';
 import ScrollToTop from '@/components/ui-custom/ScrollToTop';
+import WhatsAppButton from '@/components/ui-custom/WhatsAppButton';
 import SectionDivider from '@/components/ui-custom/SectionDivider';
 
 export default function Home() {
@@ -39,6 +40,7 @@ export default function Home() {
 
       <Footer />
       <ScrollToTop />
+      <WhatsAppButton />
     </div>
   );
 }

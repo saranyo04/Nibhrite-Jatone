@@ -9,7 +9,7 @@ export const siteConfig = {
 export const navItems = [
   { label: "Home", href: "#home" },
   { label: "About", href: "#about" },
-  { label: "Gallery", href: "#gallery" },
+  { label: "Gallery", href: "/gallery" },
   { label: "Experience", href: "#experience" },
   { label: "Contact", href: "#contact" },
 ];
@@ -119,36 +119,60 @@ export const experiences = [
   },
 ];
 
-export const galleryCategories = ["Interior", "Exterior", "Rooms", "Food & Drinks"] as const;
+export const galleryCategories = ["All", "Interior", "Exterior", "Rooms", "Food & Drinks"] as const;
 export type GalleryCategory = typeof galleryCategories[number];
 
+export const galleryPreviewLimits: Record<GalleryCategory, number> = {
+  All: 4,
+  Interior: 4,
+  Exterior: 4,
+  Rooms: 6,
+  "Food & Drinks": 4,
+};
+
 export const galleryImages = [
-  // Interior
+  // Interior (ids 1-8)
   { id: 1, src: "/images/gallery/interior/interior-1.jpg", alt: "Cozy living room with traditional Bengali decor", category: "Interior" as const },
   { id: 2, src: "/images/gallery/interior/interior-2.jpg", alt: "Artistic corner with terracotta pieces", category: "Interior" as const },
   { id: 3, src: "/images/gallery/interior/interior-3.jpg", alt: "Warm reading nook with handmade crafts", category: "Interior" as const },
   { id: 4, src: "/images/gallery/interior/interior-4.jpg", alt: "Traditional Bengali sitting area", category: "Interior" as const },
-  // Exterior
-  { id: 5, src: "/images/gallery/exterior/exterior-1.jpg", alt: "Homestay surrounded by greenery", category: "Exterior" as const },
-  { id: 6, src: "/images/gallery/exterior/exterior-2.jpg", alt: "Garden path through Sal trees", category: "Exterior" as const },
-  { id: 7, src: "/images/gallery/exterior/exterior-3.jpg", alt: "Terracotta courtyard at dusk", category: "Exterior" as const },
-  { id: 8, src: "/images/gallery/exterior/exterior-4.jpg", alt: "Morning view from the veranda", category: "Exterior" as const },
-  // Rooms
-  { id: 9, src: "/images/gallery/rooms/rooms-1.jpg", alt: "Elegant bedroom with earthy tones", category: "Rooms" as const },
-  { id: 10, src: "/images/gallery/rooms/rooms-2.jpg", alt: "Cozy room with window view", category: "Rooms" as const },
-  { id: 11, src: "/images/gallery/rooms/rooms-3.jpg", alt: "Traditional Bengali-style room", category: "Rooms" as const },
-  { id: 12, src: "/images/gallery/rooms/rooms-4.jpg", alt: "Peaceful room with natural light", category: "Rooms" as const },
-  // Food & Drinks
-  { id: 13, src: "/images/gallery/food/food-1.jpg", alt: "Traditional Bengali thali", category: "Food & Drinks" as const },
-  { id: 14, src: "/images/gallery/food/food-2.jpg", alt: "Fresh morning chai and snacks", category: "Food & Drinks" as const },
-  { id: 15, src: "/images/gallery/food/food-3.jpg", alt: "Authentic Bengali fish curry", category: "Food & Drinks" as const },
-  { id: 16, src: "/images/gallery/food/food-4.jpg", alt: "Traditional Bengali sweets", category: "Food & Drinks" as const },
+  { id: 5, src: "/images/gallery/interior/interior-5.jpg", alt: "Elegant dining space with local artistry", category: "Interior" as const },
+  { id: 6, src: "/images/gallery/interior/interior-6.jpg", alt: "Hand-painted wall accents and cane furniture", category: "Interior" as const },
+  { id: 7, src: "/images/gallery/interior/interior-7.jpg", alt: "Rustic wooden staircase with warm lighting", category: "Interior" as const },
+  { id: 8, src: "/images/gallery/interior/interior-8.jpg", alt: "Inviting lounge with traditional kantha throws", category: "Interior" as const },
+  // Exterior (ids 9-16)
+  { id: 9, src: "/images/gallery/exterior/exterior-1.jpg", alt: "Homestay surrounded by greenery", category: "Exterior" as const },
+  { id: 10, src: "/images/gallery/exterior/exterior-2.jpg", alt: "Garden path through Sal trees", category: "Exterior" as const },
+  { id: 11, src: "/images/gallery/exterior/exterior-3.jpg", alt: "Terracotta courtyard at dusk", category: "Exterior" as const },
+  { id: 12, src: "/images/gallery/exterior/exterior-4.jpg", alt: "Morning view from the veranda", category: "Exterior" as const },
+  { id: 13, src: "/images/gallery/exterior/exterior-5.jpg", alt: "Lush garden with flowering plants", category: "Exterior" as const },
+  { id: 14, src: "/images/gallery/exterior/exterior-6.jpg", alt: "Open sky view from the courtyard", category: "Exterior" as const },
+  { id: 15, src: "/images/gallery/exterior/exterior-7.jpg", alt: "Serene pond beside the homestay", category: "Exterior" as const },
+  { id: 16, src: "/images/gallery/exterior/exterior-8.jpg", alt: "Sunset glow on the homestay facade", category: "Exterior" as const },
+  // Rooms (ids 17-24)
+  { id: 17, src: "/images/gallery/rooms/rooms-1.jpg", alt: "Elegant bedroom with earthy tones", category: "Rooms" as const },
+  { id: 18, src: "/images/gallery/rooms/rooms-2.jpg", alt: "Cozy room with window view", category: "Rooms" as const },
+  { id: 19, src: "/images/gallery/rooms/rooms-3.jpg", alt: "Traditional Bengali-style room", category: "Rooms" as const },
+  { id: 20, src: "/images/gallery/rooms/rooms-4.jpg", alt: "Peaceful room with natural light", category: "Rooms" as const },
+  { id: 21, src: "/images/gallery/rooms/rooms-5.jpg", alt: "Spacious family room with patio access", category: "Rooms" as const },
+  { id: 22, src: "/images/gallery/rooms/rooms-6.jpg", alt: "Breezy room overlooking the garden", category: "Rooms" as const },
+  { id: 23, src: "/images/gallery/rooms/rooms-7.jpg", alt: "Minimalist room with wooden furnishings", category: "Rooms" as const },
+  { id: 24, src: "/images/gallery/rooms/rooms-8.jpg", alt: "Comfortable twin-bed room with warm decor", category: "Rooms" as const },
+  // Food & Drinks (ids 25-32)
+  { id: 25, src: "/images/gallery/food/food-1.jpg", alt: "Traditional Bengali thali", category: "Food & Drinks" as const },
+  { id: 26, src: "/images/gallery/food/food-2.jpg", alt: "Fresh morning chai and snacks", category: "Food & Drinks" as const },
+  { id: 27, src: "/images/gallery/food/food-3.jpg", alt: "Authentic Bengali fish curry", category: "Food & Drinks" as const },
+  { id: 28, src: "/images/gallery/food/food-4.jpg", alt: "Traditional Bengali sweets", category: "Food & Drinks" as const },
+  { id: 29, src: "/images/gallery/food/food-5.jpg", alt: "Home-cooked dal and seasonal vegetables", category: "Food & Drinks" as const },
+  { id: 30, src: "/images/gallery/food/food-6.jpg", alt: "Breakfast spread with luchi and aloor dom", category: "Food & Drinks" as const },
+  { id: 31, src: "/images/gallery/food/food-7.jpg", alt: "Refreshing aam panna and summer drinks", category: "Food & Drinks" as const },
+  { id: 32, src: "/images/gallery/food/food-8.jpg", alt: "Festive meal with payesh and mishti", category: "Food & Drinks" as const },
 ];
 
 export const contactInfo = {
   address: "Nibhṛite Jatone, Kheledanga, Ballavpur, West Bengal 731236",
-  phone: "+91 98765 43210",
-  email: "stay@nibhritejatone.com",
+  phone: "+91 97483 18934",
+  email: "nibhritejotone@gmail.com",
   hours: "Check-in: 12:00 PM — Check-out: 11:00 AM",
 };
 

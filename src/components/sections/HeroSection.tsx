@@ -63,44 +63,6 @@ function BirdSilhouette({ delay, top }: { delay: number; top: string }) {
   );
 }
 
-function FloatingBaulInstrument({
-  className,
-  size = 120,
-  floatDuration = 10,
-  rotateRange = 4,
-  delay = 0,
-}: {
-  className?: string;
-  size?: number;
-  floatDuration?: number;
-  rotateRange?: number;
-  delay?: number;
-}) {
-  return (
-    <motion.div
-      className={`absolute pointer-events-none select-none z-[5] ${className}`}
-      animate={{
-        y: [0, -14, 0],
-        rotate: [0, rotateRange, -rotateRange, 0],
-      }}
-      transition={{
-        duration: floatDuration,
-        delay,
-        repeat: Infinity,
-        ease: 'easeInOut',
-      }}
-    >
-      <img
-        src="/images/baul-instrument.png"
-        alt="Baul instrument"
-        width={size}
-        height={Math.round(size * 1.5)}
-        className="opacity-30"
-      />
-    </motion.div>
-  );
-}
-
 function AlpanaDecoration({ className }: { className?: string }) {
   return (
     <div className={`absolute pointer-events-none select-none opacity-[0.06] ${className}`}>
@@ -129,7 +91,7 @@ export default function HeroSection() {
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Warm Santiniketan morning gradient — earthy, peaceful, authentic */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#E8D5B7] via-[#F0E4CE] to-[#FAF7F2]" />
-      
+
       {/* Simulated forest silhouette at bottom */}
       <div className="absolute bottom-0 left-0 right-0 h-1/3">
         <svg className="absolute bottom-0 w-full" viewBox="0 0 1440 200" preserveAspectRatio="none" fill="none">
@@ -157,7 +119,7 @@ export default function HeroSection() {
       <BirdSilhouette delay={8} top="25%" />
       <BirdSilhouette delay={15} top="20%" />
 
-      {/* Alpana decorations */}
+      {/* Alpana decorations — visible only on xl screens */}
       <AlpanaDecoration className="top-[15%] left-[5%] hidden xl:block" />
       <AlpanaDecoration className="bottom-[25%] right-[3%] hidden xl:block" />
 
@@ -194,8 +156,8 @@ export default function HeroSection() {
       ))}
 
       {/* Main Content */}
-      <div className="relative z-10 text-center px-4 sm:px-6 max-w-4xl mx-auto">
-        {/* Baul instrument — above the decorative line */}
+      <div className="relative z-10 text-center px-5 sm:px-6 max-w-4xl mx-auto">
+        {/* Baul instrument — centered above decorative line, smaller on mobile */}
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -214,12 +176,13 @@ export default function HeroSection() {
             }}
             className="-scale-x-100"
           >
+            {/* Mobile: 90×135, Desktop (sm+): 130×195 */}
             <img
               src="/images/baul-instrument.png"
               alt="Baul instrument"
               width={130}
               height={195}
-              className="opacity-30"
+              className="opacity-30 w-[90px] h-[135px] sm:w-[130px] sm:h-[195px]"
             />
           </motion.div>
         </motion.div>
@@ -229,7 +192,7 @@ export default function HeroSection() {
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ duration: 1.5, delay: 0.3 }}
-          className="w-24 h-[1px] bg-terracotta/40 mx-auto mb-8"
+          className="w-16 sm:w-24 h-[1px] bg-terracotta/40 mx-auto mb-8"
         />
 
         {/* Bengali subtitle above heading */}
@@ -237,10 +200,10 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.5 }}
-          className="text-sm sm:text-base text-mud-brown/60 tracking-[0.3em] uppercase mb-4"
+          className="text-xs sm:text-sm md:text-base text-mud-brown/60 tracking-[0.3em] uppercase mb-4"
           style={{ fontFamily: 'var(--font-noto-bengali)' }}
         >
-          নিভৃতে যতনে
+          {siteConfig.bengaliName}
         </motion.p>
 
         {/* Main heading */}
@@ -248,7 +211,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 0.7 }}
-          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light text-mud-brown tracking-wide mb-6"
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-mud-brown tracking-wide mb-6"
           style={{ fontFamily: 'var(--font-cormorant)' }}
         >
           Nibhṛite{' '}
@@ -260,10 +223,10 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 1.0 }}
-          className="text-base sm:text-lg md:text-xl text-mud-brown/70 mb-4 max-w-2xl mx-auto leading-relaxed"
+          className="text-sm sm:text-base md:text-lg text-mud-brown/70 mb-4 max-w-2xl mx-auto leading-relaxed"
           style={{ fontFamily: 'var(--font-nunito)' }}
         >
-          A soulful homestay experience in the heart of Santiniketan
+          {siteConfig.tagline}
         </motion.p>
 
         {/* Bengali line */}
@@ -271,13 +234,13 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 1.2 }}
-          className="text-lg sm:text-xl text-terracotta/70 mb-10"
+          className="text-base sm:text-lg text-terracotta/70 mb-10"
           style={{ fontFamily: 'var(--font-noto-bengali)' }}
         >
-          শান্তির আশ্রয়, প্রকৃতির কোলে
+          {siteConfig.bengaliTagline}
         </motion.p>
 
-        {/* CTA Buttons */}
+        {/* CTA Buttons — stacked on mobile, row on sm+ */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -289,7 +252,7 @@ export default function HeroSection() {
             whileTap={{ scale: 0.97 }}
             onClick={() => handleScroll('about')}
             suppressHydrationWarning
-            className="px-8 py-3.5 bg-terracotta text-cream rounded-full text-sm font-medium tracking-wide hover:bg-terracotta-dark transition-colors duration-300 shadow-[0_4px_15px_rgba(160,82,45,0.2)]"
+            className="min-h-[44px] px-6 py-3 sm:px-8 sm:py-3.5 bg-terracotta text-cream rounded-full text-sm font-medium tracking-wide hover:bg-terracotta-dark transition-colors duration-300 shadow-[0_4px_15px_rgba(160,82,45,0.2)]"
             style={{ fontFamily: 'var(--font-nunito)' }}
           >
             Explore Stay
@@ -299,7 +262,7 @@ export default function HeroSection() {
             whileTap={{ scale: 0.97 }}
             onClick={() => handleScroll('gallery')}
             suppressHydrationWarning
-            className="px-8 py-3.5 bg-transparent border-2 border-terracotta/40 text-terracotta rounded-full text-sm font-medium tracking-wide hover:border-terracotta hover:bg-terracotta/5 transition-all duration-300"
+            className="min-h-[44px] px-6 py-3 sm:px-8 sm:py-3.5 bg-transparent border-2 border-terracotta/40 text-terracotta rounded-full text-sm font-medium tracking-wide hover:border-terracotta hover:bg-terracotta/5 transition-all duration-300"
             style={{ fontFamily: 'var(--font-nunito)' }}
           >
             View Gallery
@@ -307,24 +270,20 @@ export default function HeroSection() {
         </motion.div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* Scroll indicator — double chevron, no text */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2.5, duration: 1 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        className="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center"
       >
-        <span
-          className="text-xs text-mud-brown/40 tracking-widest uppercase"
-          style={{ fontFamily: 'var(--font-nunito)' }}
-        >
-          Scroll
-        </span>
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+          className="flex flex-col items-center"
         >
-          <ChevronDown className="w-5 h-5 text-mud-brown/30" />
+          <ChevronDown className="w-5 h-5 text-mud-brown/35" />
+          <ChevronDown className="w-5 h-5 text-mud-brown/25 -mt-2" />
         </motion.div>
       </motion.div>
     </section>
