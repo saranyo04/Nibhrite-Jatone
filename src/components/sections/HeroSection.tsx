@@ -156,7 +156,7 @@ export default function HeroSection() {
       ))}
 
       {/* Main Content */}
-      <div className="relative z-10 text-center px-5 sm:px-6 max-w-4xl mx-auto">
+      <div className="relative z-10 text-center px-5 sm:px-6 max-w-4xl mx-auto -mt-12">
         {/* Baul instrument — centered above decorative line, smaller on mobile */}
         <motion.div
           initial={{ opacity: 0, y: -10 }}
