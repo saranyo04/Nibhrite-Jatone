@@ -372,6 +372,21 @@ export default function ContactSection() {
         </div>
       </div>
 
+      {/* Mini wave at bottom — curves into the footer */}
+      <div className="w-full mt-10 sm:mt-14 lg:mt-16">
+        <svg
+          viewBox="0 0 1440 40"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="w-full h-[30px] sm:h-[35px] md:h-[40px] block"
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M0 0H1440V18C1320 32 1200 8 1080 18C960 28 840 8 720 18C600 28 480 8 360 18C240 28 120 8 0 22V0Z"
+            fill="#6B4F3A"
+          />
+        </svg>
+      </div>
     </section>
   );
 }
