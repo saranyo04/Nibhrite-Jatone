@@ -229,12 +229,14 @@ export default function ContactSection() {
                 {/* Name */}
                 <div>
                   <label
+                    htmlFor="contact-name"
                     className="block text-sm font-medium text-mud-brown/70 mb-2"
                     style={{ fontFamily: 'var(--font-nunito)' }}
                   >
                     Name <span className="text-red-500">*</span>
                   </label>
                   <input
+                    id="contact-name"
                     type="text"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -249,6 +251,7 @@ export default function ContactSection() {
                 {/* Email (optional) */}
                 <div>
                   <label
+                    htmlFor="contact-email"
                     className="block text-sm font-medium text-mud-brown/70 mb-2"
                     style={{ fontFamily: 'var(--font-nunito)' }}
                   >
@@ -256,6 +259,7 @@ export default function ContactSection() {
                     <span className="text-mud-brown/40 font-normal">(optional — required for email)</span>
                   </label>
                   <input
+                    id="contact-email"
                     type="email"
                     value={formData.email}
                     onChange={(e) => {
@@ -294,12 +298,14 @@ export default function ContactSection() {
                 {/* Message */}
                 <div>
                   <label
+                    htmlFor="contact-message"
                     className="block text-sm font-medium text-mud-brown/70 mb-2"
                     style={{ fontFamily: 'var(--font-nunito)' }}
                   >
                     Message <span className="text-red-500">*</span>
                   </label>
                   <textarea
+                    id="contact-message"
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     required

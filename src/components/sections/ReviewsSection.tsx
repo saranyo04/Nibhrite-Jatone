@@ -31,11 +31,16 @@ export default function ReviewsSection() {
 
   useEffect(() => {
     if (!emblaApi) return;
-    onSelect();
-    setScrollSnaps(emblaApi.scrollSnapList());
+    let cancelled = false;
+    queueMicrotask(() => {
+      if (cancelled) return;
+      onSelect();
+      setScrollSnaps(emblaApi.scrollSnapList());
+    });
     emblaApi.on('select', onSelect);
     emblaApi.on('reInit', onSelect);
     return () => {
+      cancelled = true;
       emblaApi.off('select', onSelect);
     };
   }, [emblaApi, onSelect]);
