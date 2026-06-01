@@ -10,6 +10,7 @@ export default function GallerySection() {
   const [activeCategory, setActiveCategory] = useState<GalleryCategory>('All');
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxImage, setLightboxImage] = useState<typeof galleryImages[0] | null>(null);
+  const [failedImageIds, setFailedImageIds] = useState<number[]>([]);
 
   const filteredImages =
     activeCategory === 'All'
@@ -27,6 +28,10 @@ export default function GallerySection() {
   const closeLightbox = useCallback(() => {
     setLightboxOpen(false);
     setLightboxImage(null);
+  }, []);
+
+  const markImageFailed = useCallback((id: number) => {
+    setFailedImageIds((prev) => (prev.includes(id) ? prev : [...prev, id]));
   }, []);
 
   return (
@@ -92,7 +97,10 @@ export default function GallerySection() {
         {/* Masonry Grid */}
         <div className="masonry-grid">
           <AnimatePresence mode="popLayout">
-            {previewImages.map((img, i) => (
+            {previewImages.map((img, i) => {
+              const imageFailed = failedImageIds.includes(img.id);
+
+              return (
               <motion.div
                 key={img.id}
                 layout
@@ -106,35 +114,31 @@ export default function GallerySection() {
                 <div
                   className={`${
                     i % 3 === 0 ? 'aspect-[3/4]' : i % 3 === 1 ? 'aspect-square' : 'aspect-[4/3]'
-                  } bg-gradient-to-br from-warm-beige to-parchment relative`}
+                  } bg-gradient-to-br from-warm-beige to-parchment relative${imageFailed ? ' flex items-center justify-center' : ''}`}
                 >
-                  <img
-                    src={img.src}
-                    alt={img.alt}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                    loading="lazy"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.style.display = 'none';
-                      const parent = target.parentElement;
-                      if (parent && !parent.querySelector('.placeholder-content')) {
-                        parent.classList.add('flex', 'items-center', 'justify-center');
-                        const placeholder = document.createElement('div');
-                        placeholder.className = 'placeholder-content text-center p-4';
-                        placeholder.innerHTML = `
-                          <div class="w-10 h-10 mx-auto mb-2 rounded-lg bg-terracotta/10 flex items-center justify-center">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#A0522D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.4">
-                              <rect width="18" height="18" x="3" y="3" rx="2" ry="2"/>
-                              <circle cx="9" cy="9" r="2"/>
-                              <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>
-                            </svg>
-                          </div>
-                          <p style="font-family: var(--font-cormorant); color: rgba(107,79,58,0.3); font-size: 12px">${img.category}</p>
-                        `;
-                        parent.appendChild(placeholder);
-                      }
-                    }}
-                  />
+                  {!imageFailed && (
+                    <img
+                      src={img.src}
+                      alt={img.alt}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      loading="lazy"
+                      onError={() => {
+                        markImageFailed(img.id);
+                      }}
+                    />
+                  )}
+                  {imageFailed && (
+                    <div className="placeholder-content text-center p-4">
+                      <div className="w-10 h-10 mx-auto mb-2 rounded-lg bg-terracotta/10 flex items-center justify-center">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#A0522D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.4">
+                          <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
+                          <circle cx="9" cy="9" r="2" />
+                          <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
+                        </svg>
+                      </div>
+                      <p style={{ fontFamily: 'var(--font-cormorant)', color: 'rgba(107,79,58,0.3)', fontSize: '12px' }}>{img.category}</p>
+                    </div>
+                  )}
                 </div>
 
                 {/* Hover overlay with alt text */}
@@ -166,7 +170,8 @@ export default function GallerySection() {
                   </div>
                 )}
               </motion.div>
-            ))}
+              );
+            })}
           </AnimatePresence>
         </div>
 

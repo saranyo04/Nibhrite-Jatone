@@ -4,13 +4,18 @@ import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { siteConfig } from '@/data/site-data';
 
+const LOADING_DURATION_MS = 1300;
+let hasShownHomeLoadingScreen = false;
+
 export default function LoadingScreen() {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(() => !hasShownHomeLoadingScreen);
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 2200);
+    if (!loading) return;
+    hasShownHomeLoadingScreen = true;
+    const timer = setTimeout(() => setLoading(false), LOADING_DURATION_MS);
     return () => clearTimeout(timer);
-  }, []);
+  }, [loading]);
 
   return (
     <AnimatePresence>

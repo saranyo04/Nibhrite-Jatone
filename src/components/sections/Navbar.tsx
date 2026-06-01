@@ -7,6 +7,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { navItems, siteConfig } from '@/data/site-data';
 
+const HOME_SCROLL_RESTORE_KEY = 'nibhrite-home-scroll-y';
+const HOME_SCROLL_RESTORE_PENDING_KEY = 'nibhrite-home-scroll-restore-pending';
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -22,9 +25,9 @@ export default function Navbar() {
       // Only run section detection on homepage
       if (pathname !== '/') return;
 
-      // Only check section anchors (items starting with '#')
-      const sectionItems = navItems.filter(item => item.href.startsWith('#'));
-      const sections = sectionItems.map(item => item.href.replace('#', ''));
+      const sections = navItems
+        .map((item) => item.href === '/gallery' ? 'gallery' : item.href.startsWith('#') ? item.href.replace('#', '') : null)
+        .filter((section): section is string => section !== null);
       for (let i = sections.length - 1; i >= 0; i--) {
         const el = document.getElementById(sections[i]);
         if (el) {
@@ -56,6 +59,22 @@ export default function Navbar() {
     // Section anchors: only active on homepage
     if (!isHomePage) return false;
     return activeSection === href.replace('#', '');
+  };
+
+  const isDesktopActive = (href: string) => {
+    if (isHomePage && href === '/gallery') {
+      return activeSection === 'gallery';
+    }
+    return isActive(href);
+  };
+
+  const preserveHomeScrollPosition = () => {
+    if (!isHomePage) return;
+    try {
+      sessionStorage.setItem(HOME_SCROLL_RESTORE_KEY, String(window.scrollY));
+      sessionStorage.setItem(HOME_SCROLL_RESTORE_PENDING_KEY, 'true');
+    } catch {
+    }
   };
 
   return (
@@ -104,15 +123,16 @@ export default function Navbar() {
                     <Link
                       key={item.href}
                       href={item.href}
+                      onClick={item.href === '/gallery' ? preserveHomeScrollPosition : undefined}
                       className={`relative px-4 py-2 text-sm font-medium transition-colors duration-300 rounded-full ${
-                        isActive(item.href)
+                        isDesktopActive(item.href)
                           ? 'text-terracotta'
                           : 'text-mud-brown/70 hover:text-terracotta'
                       }`}
                       style={{ fontFamily: 'var(--font-nunito)' }}
                     >
                       {item.label}
-                      {isActive(item.href) && (
+                      {isDesktopActive(item.href) && (
                         <motion.div
                           layoutId="activeNav"
                           className="absolute bottom-0 left-1/2 -translate-x-1/2 w-6 h-0.5 bg-terracotta rounded-full"

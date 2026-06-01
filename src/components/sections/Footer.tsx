@@ -3,7 +3,7 @@
 import React from 'react';
 import { Instagram, Facebook, Mail, Heart } from 'lucide-react';
 import Link from 'next/link';
-import { navItems, siteConfig, footerQuote, contactInfo } from '@/data/site-data';
+import { navItems, siteConfig, footerQuote, contactInfo, contactLinks } from '@/data/site-data';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -80,7 +80,7 @@ export default function Footer() {
               {/* Social links */}
               <div className="flex items-center gap-3 mb-4">
                 <a
-                  href="https://www.instagram.com/nibhritejatonehomestay/"
+                  href={contactLinks.instagramUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-9 h-9 rounded-full bg-cream/10 flex items-center justify-center hover:bg-cream/20 transition-colors duration-200"
@@ -89,7 +89,7 @@ export default function Footer() {
                   <Instagram className="w-4 h-4 text-cream/70" />
                 </a>
                 <a
-                  href="https://www.facebook.com/nibhritejatonehomestay/"
+                  href={contactLinks.facebookUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-9 h-9 rounded-full bg-cream/10 flex items-center justify-center hover:bg-cream/20 transition-colors duration-200"
@@ -98,7 +98,7 @@ export default function Footer() {
                   <Facebook className="w-4 h-4 text-cream/70" />
                 </a>
                 <a
-                  href="mailto:nibhritejotone@gmail.com"
+                  href={contactLinks.emailHref}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-9 h-9 rounded-full bg-cream/10 flex items-center justify-center hover:bg-cream/20 transition-colors duration-200"
@@ -110,7 +110,7 @@ export default function Footer() {
 
               {/* Email */}
               <a
-                href="mailto:nibhritejotone@gmail.com"
+                href={contactLinks.emailHref}
                 className="block text-xs sm:text-sm text-cream/60 hover:text-cream transition-colors duration-200 mb-1"
               >
                 {contactInfo.email}

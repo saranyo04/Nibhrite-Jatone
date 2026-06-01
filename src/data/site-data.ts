@@ -153,6 +153,16 @@ export const galleryImages = [
   { id: 28, src: "/images/gallery/food/food-4.jpg", alt: "Traditional Bengali sweets", category: "Food & Drinks" as const },
 ];
 
+export const contactLinks = {
+  whatsappBaseUrl: "https://wa.me/919748318934",
+  whatsappMessageUrlPrefix: "https://wa.me/919748318934?text=",
+  emailHref: "mailto:nibhritejotone@gmail.com",
+  mapUrl: "https://maps.app.goo.gl/es4hNxSJEQhJpXfw9",
+  mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d500!2d87.6465327!3d23.6785441!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f9dd00342cd225%3A0xd422acc6dcc8d26b!2sNibh%E1%B9%9Bite%20Jatone!5e0!3m2!1sen!2sin",
+  instagramUrl: "https://www.instagram.com/nibhritejatonehomestay/",
+  facebookUrl: "https://www.facebook.com/nibhritejatonehomestay/",
+};
+
 export const contactInfo = {
   address: "Nibhṛite Jatone, Kheledanga, Ballavpur, West Bengal 731236",
   phone: "+91 97483 18934",

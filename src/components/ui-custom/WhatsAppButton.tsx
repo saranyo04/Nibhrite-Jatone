@@ -3,12 +3,13 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageCircle } from 'lucide-react';
+import { contactLinks } from '@/data/site-data';
 
 export default function WhatsAppButton() {
   return (
     <AnimatePresence>
       <motion.a
-        href="https://wa.me/919748318934"
+        href={contactLinks.whatsappBaseUrl}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat on WhatsApp"

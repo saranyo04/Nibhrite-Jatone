@@ -3,7 +3,7 @@
 import React, { useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { MapPin, Phone, Mail, Clock, Navigation, MessageCircle, Send, AlertCircle } from 'lucide-react';
-import { contactInfo } from '@/data/site-data';
+import { contactInfo, contactLinks } from '@/data/site-data';
 
 function isValidEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -18,7 +18,7 @@ export default function ContactSection() {
       ? `Hi, I'm ${formData.name} (${formData.email}).\n\n${formData.message}`
       : `Hi, I'm ${formData.name}.\n\n${formData.message}`;
     const encoded = encodeURIComponent(message);
-    window.open(`https://wa.me/919748318934?text=${encoded}`, '_blank');
+    window.open(`${contactLinks.whatsappMessageUrlPrefix}${encoded}`, '_blank');
   }, [formData]);
 
   const handleSendEmail = useCallback(() => {
@@ -32,7 +32,7 @@ export default function ContactSection() {
     const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`);
 
     try {
-      window.location.href = `mailto:${contactInfo.email}?subject=${subject}&body=${body}`;
+      window.location.href = `${contactLinks.emailHref}?subject=${subject}&body=${body}`;
     } catch {
       setEmailError('Email not found on this device. Please use WhatsApp instead.');
     }
@@ -156,7 +156,7 @@ export default function ContactSection() {
             {/* Directions & WhatsApp Buttons */}
             <div className="flex flex-wrap gap-3 mt-6">
               <motion.a
-                href="https://maps.app.goo.gl/es4hNxSJEQhJpXfw9"
+                href={contactLinks.mapUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ y: -2, boxShadow: '0 6px 25px rgba(85, 107, 47, 0.25)' }}
@@ -169,7 +169,7 @@ export default function ContactSection() {
               </motion.a>
 
               <motion.a
-                href="https://wa.me/919748318934"
+                href={contactLinks.whatsappBaseUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ y: -2, boxShadow: '0 6px 25px rgba(37, 211, 102, 0.25)' }}
@@ -185,7 +185,7 @@ export default function ContactSection() {
             {/* Google Map */}
             <div className="mt-6 rounded-xl overflow-hidden warm-shadow border border-warm-beige/40">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d500!2d87.6465327!3d23.6785441!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f9dd00342cd225%3A0xd422acc6dcc8d26b!2sNibh%E1%B9%9Bite%20Jatone!5e0!3m2!1sen!2sin"
+                src={contactLinks.mapEmbedUrl}
                 width="100%"
                 height="220"
                 style={{ border: 0 }}
