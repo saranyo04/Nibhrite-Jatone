@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { Suspense, useState, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ZoomIn, ChevronLeft, ChevronRight, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
@@ -22,7 +22,7 @@ function getCategoryFromParam(param: string | null): GalleryCategory {
   return firstLetterMatch || 'All';
 }
 
-export default function GalleryPage() {
+function GalleryContent() {
   const searchParams = useSearchParams();
   const categoryParam = searchParams.get('category');
 
@@ -328,5 +328,13 @@ export default function GalleryPage() {
         )}
       </AnimatePresence>
     </div>
+  );
+}
+
+export default function GalleryPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-cream" />}>
+      <GalleryContent />
+    </Suspense>
   );
 }

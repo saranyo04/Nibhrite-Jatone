@@ -57,6 +57,7 @@ export default function RootLayout({
   return (
     <html lang="bn" suppressHydrationWarning>
       <body
+        suppressHydrationWarning
         className={`${cormorant.variable} ${nunito.variable} ${notoBengali.variable} antialiased bg-background text-foreground`}
       >
         {children}
