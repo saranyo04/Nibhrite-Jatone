@@ -42,6 +42,7 @@ export default function ReviewsSection() {
     return () => {
       cancelled = true;
       emblaApi.off('select', onSelect);
+      emblaApi.off('reInit', onSelect);
     };
   }, [emblaApi, onSelect]);
 

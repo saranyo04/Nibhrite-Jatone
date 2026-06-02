@@ -2,11 +2,12 @@
 
 import React, { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ZoomIn, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { galleryImages, galleryCategories, galleryPreviewLimits, type GalleryCategory, type GalleryImage } from '@/data/site-data';
 import { HOME_SCROLL_RESTORE_PENDING_KEY, SECTION_IDS } from '@/data/navigation-state';
 import { buildGalleryHref, getGalleryImagesForCategory } from '@/lib/gallery';
+import { GalleryImageCard, GalleryLightbox } from '@/components/sections/GalleryShared';
 
 export default function GallerySection() {
   const [activeCategory, setActiveCategory] = useState<GalleryCategory>('All');
@@ -103,81 +104,22 @@ export default function GallerySection() {
         {/* Masonry Grid */}
         <div className="masonry-grid">
           <AnimatePresence mode="popLayout">
-            {previewImages.map((img, i) => {
-              const imageFailed = failedImageIds.includes(img.id);
-
-              return (
-              <motion.div
+            {previewImages.map((img, i) => (
+              <GalleryImageCard
                 key={img.id}
-                layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.5, delay: i * 0.05 }}
-                className="group relative rounded-xl overflow-hidden cursor-pointer warm-shadow"
+                image={img}
+                index={i}
+                imageFailed={failedImageIds.includes(img.id)}
+                cardClassName="group relative rounded-xl overflow-hidden cursor-pointer warm-shadow"
+                zoomClassName="absolute top-3 right-3 w-8 h-8 rounded-lg bg-cream/80 backdrop-blur-sm hidden sm:flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                transitionDelay={i * 0.05}
+                showCategoryBadge={activeCategory === 'All'}
                 onClick={() => openLightbox(img)}
-              >
-                <div
-                  className={`${
-                    i % 3 === 0 ? 'aspect-[3/4]' : i % 3 === 1 ? 'aspect-square' : 'aspect-[4/3]'
-                  } bg-gradient-to-br from-warm-beige to-parchment relative${imageFailed ? ' flex items-center justify-center' : ''}`}
-                >
-                  {!imageFailed && (
-                    <img
-                      src={img.src}
-                      alt={img.alt}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                      loading="lazy"
-                      onError={() => {
-                        markImageFailed(img.id);
-                      }}
-                    />
-                  )}
-                  {imageFailed && (
-                    <div className="placeholder-content text-center p-4">
-                      <div className="w-10 h-10 mx-auto mb-2 rounded-lg bg-terracotta/10 flex items-center justify-center">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#A0522D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.4">
-                          <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
-                          <circle cx="9" cy="9" r="2" />
-                          <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
-                        </svg>
-                      </div>
-                      <p style={{ fontFamily: 'var(--font-cormorant)', color: 'rgba(107,79,58,0.3)', fontSize: '12px' }}>{img.category}</p>
-                    </div>
-                  )}
-                </div>
-
-                {/* Hover overlay with alt text */}
-                <div className="absolute inset-0 bg-gradient-to-t from-mud-brown/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end">
-                  <div className="p-4 w-full">
-                    <p
-                      className="text-xs text-cream/80"
-                      style={{ fontFamily: 'var(--font-nunito)' }}
-                    >
-                      {img.alt}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Zoom icon - hidden on mobile */}
-                <div className="absolute top-3 right-3 w-8 h-8 rounded-lg bg-cream/80 backdrop-blur-sm hidden sm:flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <ZoomIn className="w-4 h-4 text-terracotta" />
-                </div>
-
-                {/* Category badge - only show when activeCategory === 'All' */}
-                {activeCategory === 'All' && (
-                  <div className="absolute top-3 left-3">
-                    <span
-                      className="px-2 py-1 text-[10px] rounded-full bg-cream/80 backdrop-blur-sm text-terracotta/70 font-medium"
-                      style={{ fontFamily: 'var(--font-nunito)' }}
-                    >
-                      {img.category}
-                    </span>
-                  </div>
-                )}
-              </motion.div>
-              );
-            })}
+                onImageError={() => {
+                  markImageFailed(img.id);
+                }}
+              />
+            ))}
           </AnimatePresence>
         </div>
 
@@ -204,54 +146,14 @@ export default function GallerySection() {
       {/* Lightbox */}
       <AnimatePresence>
         {lightboxOpen && lightboxImage && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[60] bg-mud-brown/90 backdrop-blur-sm flex items-center justify-center p-2 sm:p-4"
-            onClick={closeLightbox}
-          >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="relative max-w-4xl max-h-[85vh] rounded-2xl overflow-hidden warm-shadow-lg"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <img
-                src={lightboxImage.src}
-                alt={lightboxImage.alt}
-                className="w-full h-full object-contain"
-              />
-
-              {/* Close button */}
-              <button
-                onClick={closeLightbox}
-                className="absolute top-3 right-3 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-cream/90 flex items-center justify-center hover:bg-cream transition-colors shadow-lg"
-                aria-label="Close lightbox"
-              >
-                <X className="w-4 h-4 sm:w-5 sm:h-5 text-mud-brown" />
-              </button>
-
-              {/* Caption bar */}
-              <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-mud-brown/80 to-transparent">
-                <p
-                  className="text-sm text-cream/90"
-                  style={{ fontFamily: 'var(--font-nunito)' }}
-                >
-                  {lightboxImage.alt}
-                </p>
-                <p
-                  className="text-xs text-cream/50 mt-1"
-                  style={{ fontFamily: 'var(--font-nunito)' }}
-                >
-                  {lightboxImage.category}
-                </p>
-              </div>
-            </motion.div>
-          </motion.div>
+          <GalleryLightbox
+            image={lightboxImage}
+            overlayClassName="fixed inset-0 z-[60] bg-mud-brown/90 backdrop-blur-sm flex items-center justify-center p-2 sm:p-4"
+            containerClassName="relative max-w-4xl max-h-[85vh] rounded-2xl overflow-hidden warm-shadow-lg"
+            closeButtonClassName="absolute top-3 right-3 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-cream/90 flex items-center justify-center hover:bg-cream transition-colors shadow-lg"
+            closeIconClassName="w-4 h-4 sm:w-5 sm:h-5 text-mud-brown"
+            onClose={closeLightbox}
+          />
         )}
       </AnimatePresence>
     </section>

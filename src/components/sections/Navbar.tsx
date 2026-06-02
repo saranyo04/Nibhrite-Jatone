@@ -84,8 +84,11 @@ export default function Navbar() {
               transition={{ type: 'spring', stiffness: 300 }}
             >
               <a
-                href={SECTION_HASHES.home}
-                onClick={(e) => { e.preventDefault(); handleNavClick(SECTION_HASHES.home); }}
+                href={isHomePage ? SECTION_HASHES.home : ROUTES.home}
+                onClick={(e) => {
+                  if (isHomePage) e.preventDefault();
+                  handleNavClick(SECTION_HASHES.home);
+                }}
                 className="font-heading text-lg sm:text-xl md:text-2xl font-semibold text-terracotta tracking-wide"
                 style={{ fontFamily: 'var(--font-cormorant)' }}
               >

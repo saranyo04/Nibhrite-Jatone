@@ -59,11 +59,7 @@ export default function ContactSection() {
     const subject = encodeURIComponent(`Message from ${formData.name} — Nibhṛite Jatone Inquiry`);
     const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`);
 
-    try {
-      window.location.href = `${contactLinks.emailHref}?subject=${subject}&body=${body}`;
-    } catch {
-      setEmailError('Email not found on this device. Please use WhatsApp instead.');
-    }
+    window.location.href = `${contactLinks.emailHref}?subject=${subject}&body=${body}`;
   }, [formData]);
 
   const emailIsValid = formData.email.length > 0 && isValidEmail(formData.email);
