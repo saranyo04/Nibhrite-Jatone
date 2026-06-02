@@ -1,5 +1,6 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { Cormorant_Garamond, Nunito, Noto_Serif_Bengali } from "next/font/google";
+import { siteConfig } from "@/data/site-data";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
@@ -24,28 +25,43 @@ const notoBengali = Noto_Serif_Bengali({
 });
 
 export const metadata: Metadata = {
-  title: "Nibhṛite Jatone | নিভৃতে যতনে — A Soulful Homestay in Santiniketan",
+  title: {
+    default: `${siteConfig.name} | ${siteConfig.bengaliName} — A Soulful Homestay in Santiniketan`,
+    template: `%s | ${siteConfig.name}`,
+  },
+  applicationName: siteConfig.name,
   description:
-    "Discover peace in the heart of Santiniketan. Nibhṛite Jatone offers a soulful homestay experience surrounded by Sonajhuri forests, Baul culture, and authentic Bengali hospitality.",
+    `Discover peace in the heart of Santiniketan. ${siteConfig.name} offers a soulful homestay experience surrounded by Sonajhuri forests, Baul culture, and authentic Bengali hospitality.`,
   keywords: [
     "Santiniketan homestay",
     "Bengali culture",
     "Sonajhuri forest",
     "Nibhrite Jatone",
-    "নিভৃতে যতনে",
+    siteConfig.bengaliName,
     "peaceful retreat",
     "Bengal heritage",
   ],
-  authors: [{ name: "Nibhṛite Jatone" }],
+  authors: [{ name: siteConfig.name }],
   icons: {
     icon: "/logo.svg",
   },
+  robots: {
+    index: true,
+    follow: true,
+  },
   openGraph: {
-    title: "Nibhṛite Jatone — A Soulful Homestay in Santiniketan",
+    title: `${siteConfig.name} — A Soulful Homestay in Santiniketan`,
     description:
-      "শান্তির আশ্রয়, প্রকৃতির কোলে — Experience authentic Bengali hospitality in the heart of Santiniketan",
+      `${siteConfig.bengaliTagline} — Experience authentic Bengali hospitality in the heart of Santiniketan`,
+    siteName: siteConfig.name,
     type: "website",
     locale: "bn_IN",
+  },
+  twitter: {
+    card: "summary",
+    title: `${siteConfig.name} — A Soulful Homestay in Santiniketan`,
+    description:
+      `Discover peace in the heart of Santiniketan. ${siteConfig.name} offers a soulful homestay experience surrounded by Sonajhuri forests, Baul culture, and authentic Bengali hospitality.`,
   },
 };
 
