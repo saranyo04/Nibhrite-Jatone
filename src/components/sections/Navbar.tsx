@@ -10,6 +10,7 @@ import {
   HOME_SCROLL_RESTORE_KEY,
   HOME_SCROLL_RESTORE_PENDING_KEY,
   ROUTES,
+  SECTION_HASHES,
   SECTION_IDS,
 } from '@/data/navigation-state';
 
@@ -101,8 +102,8 @@ export default function Navbar() {
               transition={{ type: 'spring', stiffness: 300 }}
             >
               <a
-                href="#home"
-                onClick={(e) => { e.preventDefault(); handleNavClick('#home'); }}
+                href={SECTION_HASHES.home}
+                onClick={(e) => { e.preventDefault(); handleNavClick(SECTION_HASHES.home); }}
                 className="font-heading text-lg sm:text-xl md:text-2xl font-semibold text-terracotta tracking-wide"
                 style={{ fontFamily: 'var(--font-cormorant)' }}
               >
@@ -169,16 +170,6 @@ export default function Navbar() {
                   </a>
                 );
               })}
-              <Link href="/#contact">
-                <motion.span
-                  whileHover={{ y: -2, boxShadow: '0 6px 25px rgba(160, 82, 45, 0.3)' }}
-                  whileTap={{ scale: 0.97 }}
-                  className="ml-3 inline-block px-5 py-2 bg-terracotta text-cream text-sm font-medium rounded-full transition-all duration-300 hover:bg-terracotta-dark"
-                  style={{ fontFamily: 'var(--font-nunito)' }}
-                >
-                  Book Stay
-                </motion.span>
-              </Link>
             </div>
 
             {/* Mobile Menu Button */}
@@ -286,18 +277,6 @@ export default function Navbar() {
                   })}
                 </div>
 
-                <div className="mt-auto">
-                  <Link href="/#contact" onClick={() => setMobileOpen(false)}>
-                    <motion.span
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      className="block text-center px-6 py-3 bg-terracotta text-cream font-medium rounded-full hover:bg-terracotta-dark transition-colors"
-                      style={{ fontFamily: 'var(--font-nunito)' }}
-                    >
-                      Book Stay
-                    </motion.span>
-                  </Link>
-                </div>
               </div>
             </motion.div>
           </>

@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, ZoomIn, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { galleryImages, galleryCategories, galleryPreviewLimits, type GalleryCategory } from '@/data/site-data';
-import { ROUTES, SECTION_IDS } from '@/data/navigation-state';
+import { HOME_SCROLL_RESTORE_PENDING_KEY, ROUTES, SECTION_IDS } from '@/data/navigation-state';
 
 export default function GallerySection() {
   const [activeCategory, setActiveCategory] = useState<GalleryCategory>('All');
@@ -33,6 +33,13 @@ export default function GallerySection() {
 
   const markImageFailed = useCallback((id: number) => {
     setFailedImageIds((prev) => (prev.includes(id) ? prev : [...prev, id]));
+  }, []);
+
+  const markHomeScrollRestorePending = useCallback(() => {
+    try {
+      sessionStorage.setItem(HOME_SCROLL_RESTORE_PENDING_KEY, 'true');
+    } catch {
+    }
   }, []);
 
   return (
@@ -177,24 +184,23 @@ export default function GallerySection() {
         </div>
 
         {/* Show More / View Full Gallery */}
-        {filteredImages.length > previewLimit && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="flex justify-center mt-8 sm:mt-10"
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="flex justify-center mt-8 sm:mt-10"
+        >
+          <Link
+            href={activeCategory === 'All' ? ROUTES.gallery : `${ROUTES.gallery}?category=${activeCategory.toLowerCase()}`}
+            onClick={markHomeScrollRestorePending}
+            className="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-terracotta text-cream text-xs sm:text-sm font-medium shadow hover:bg-terracotta/90 transition-colors duration-300"
+            style={{ fontFamily: 'var(--font-nunito)' }}
           >
-            <Link
-              href={`${ROUTES.gallery}?category=${activeCategory === 'All' ? 'all' : activeCategory.toLowerCase()}`}
-              className="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-terracotta text-cream text-xs sm:text-sm font-medium shadow hover:bg-terracotta/90 transition-colors duration-300"
-              style={{ fontFamily: 'var(--font-nunito)' }}
-            >
-              View Full Gallery
-              <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-            </Link>
-          </motion.div>
-        )}
+            View Full Gallery
+            <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+          </Link>
+        </motion.div>
       </div>
 
       {/* Lightbox */}

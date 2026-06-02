@@ -1,3 +1,5 @@
+import { ROUTES, SECTION_HASHES } from '@/data/navigation-state';
+
 export const siteConfig = {
   name: "Nibhṛite Jatone",
   bengaliName: "নিভৃতে যতনে",
@@ -7,11 +9,11 @@ export const siteConfig = {
 };
 
 export const navItems = [
-  { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
-  { label: "Gallery", href: "/gallery" },
-  { label: "Experience", href: "#experience" },
-  { label: "Contact", href: "#contact" },
+  { label: "Home", href: SECTION_HASHES.home },
+  { label: "About", href: SECTION_HASHES.about },
+  { label: "Gallery", href: ROUTES.gallery },
+  { label: "Experience", href: SECTION_HASHES.experience },
+  { label: "Contact", href: SECTION_HASHES.contact },
 ];
 
 export const reviews = [

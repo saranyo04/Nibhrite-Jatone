@@ -250,7 +250,7 @@ export default function HeroSection() {
           <motion.button
             whileHover={{ y: -3, boxShadow: '0 8px 30px rgba(160, 82, 45, 0.25)' }}
             whileTap={{ scale: 0.97 }}
-            onClick={() => handleScroll('about')}
+            onClick={() => handleScroll(SECTION_IDS.about)}
             suppressHydrationWarning
             className="min-h-[44px] px-6 py-3 sm:px-8 sm:py-3.5 bg-terracotta text-cream rounded-full text-sm font-medium tracking-wide hover:bg-terracotta-dark transition-colors duration-300 shadow-[0_4px_15px_rgba(160,82,45,0.2)]"
             style={{ fontFamily: 'var(--font-nunito)' }}
@@ -260,7 +260,7 @@ export default function HeroSection() {
           <motion.button
             whileHover={{ y: -3, boxShadow: '0 8px 25px rgba(107, 79, 58, 0.12)' }}
             whileTap={{ scale: 0.97 }}
-            onClick={() => handleScroll('gallery')}
+            onClick={() => handleScroll(SECTION_IDS.gallery)}
             suppressHydrationWarning
             className="min-h-[44px] px-6 py-3 sm:px-8 sm:py-3.5 bg-transparent border-2 border-terracotta/40 text-terracotta rounded-full text-sm font-medium tracking-wide hover:border-terracotta hover:bg-terracotta/5 transition-all duration-300"
             style={{ fontFamily: 'var(--font-nunito)' }}
