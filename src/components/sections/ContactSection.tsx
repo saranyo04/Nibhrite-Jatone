@@ -6,6 +6,33 @@ import { MapPin, Phone, Mail, Clock, Navigation, MessageCircle, Send, AlertCircl
 import { contactInfo, contactLinks } from '@/data/site-data';
 import { SECTION_IDS } from '@/data/navigation-state';
 
+const contactCards = [
+  {
+    label: 'Address',
+    value: contactInfo.address,
+    icon: MapPin,
+    valueClassName: 'text-sm text-mud-brown/60 leading-relaxed',
+  },
+  {
+    label: 'Phone / WhatsApp',
+    value: contactInfo.phone,
+    icon: Phone,
+    valueClassName: 'text-sm text-mud-brown/60',
+  },
+  {
+    label: 'Email',
+    value: contactInfo.email,
+    icon: Mail,
+    valueClassName: 'text-sm text-mud-brown/60',
+  },
+  {
+    label: 'Hours',
+    value: contactInfo.hours,
+    icon: Clock,
+    valueClassName: 'text-sm text-mud-brown/60',
+  },
+];
+
 function isValidEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
@@ -93,65 +120,21 @@ export default function ContactSection() {
             </h3>
 
             <div className="space-y-3 sm:space-y-4">
-              {/* Address */}
-              <div className="flex items-start gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl bg-cream warm-shadow border border-warm-beige/40 hover:border-terracotta/20 transition-all duration-300">
-                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-terracotta/10 flex items-center justify-center shrink-0">
-                  <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-terracotta" />
+              {contactCards.map(({ label, value, icon: Icon, valueClassName }) => (
+                <div key={label} className="flex items-start gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl bg-cream warm-shadow border border-warm-beige/40 hover:border-terracotta/20 transition-all duration-300">
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-terracotta/10 flex items-center justify-center shrink-0">
+                    <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-terracotta" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-mud-brown mb-1" style={{ fontFamily: 'var(--font-nunito)' }}>
+                      {label}
+                    </p>
+                    <p className={valueClassName} style={{ fontFamily: 'var(--font-nunito)' }}>
+                      {value}
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-sm font-medium text-mud-brown mb-1" style={{ fontFamily: 'var(--font-nunito)' }}>
-                    Address
-                  </p>
-                  <p className="text-sm text-mud-brown/60 leading-relaxed" style={{ fontFamily: 'var(--font-nunito)' }}>
-                    {contactInfo.address}
-                  </p>
-                </div>
-              </div>
-
-              {/* Phone / WhatsApp */}
-              <div className="flex items-start gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl bg-cream warm-shadow border border-warm-beige/40 hover:border-terracotta/20 transition-all duration-300">
-                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-terracotta/10 flex items-center justify-center shrink-0">
-                  <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-terracotta" />
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-mud-brown mb-1" style={{ fontFamily: 'var(--font-nunito)' }}>
-                    Phone / WhatsApp
-                  </p>
-                  <p className="text-sm text-mud-brown/60" style={{ fontFamily: 'var(--font-nunito)' }}>
-                    {contactInfo.phone}
-                  </p>
-                </div>
-              </div>
-
-              {/* Email */}
-              <div className="flex items-start gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl bg-cream warm-shadow border border-warm-beige/40 hover:border-terracotta/20 transition-all duration-300">
-                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-terracotta/10 flex items-center justify-center shrink-0">
-                  <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-terracotta" />
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-mud-brown mb-1" style={{ fontFamily: 'var(--font-nunito)' }}>
-                    Email
-                  </p>
-                  <p className="text-sm text-mud-brown/60" style={{ fontFamily: 'var(--font-nunito)' }}>
-                    {contactInfo.email}
-                  </p>
-                </div>
-              </div>
-
-              {/* Hours */}
-              <div className="flex items-start gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl bg-cream warm-shadow border border-warm-beige/40 hover:border-terracotta/20 transition-all duration-300">
-                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-terracotta/10 flex items-center justify-center shrink-0">
-                  <Clock className="w-4 h-4 sm:w-5 sm:h-5 text-terracotta" />
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-mud-brown mb-1" style={{ fontFamily: 'var(--font-nunito)' }}>
-                    Hours
-                  </p>
-                  <p className="text-sm text-mud-brown/60" style={{ fontFamily: 'var(--font-nunito)' }}>
-                    {contactInfo.hours}
-                  </p>
-                </div>
-              </div>
+              ))}
             </div>
 
             {/* Directions & WhatsApp Buttons */}

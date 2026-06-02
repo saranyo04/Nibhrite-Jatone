@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Coffee, Footprints, Music, Utensils, Sunset, Wheat } from 'lucide-react';
 import { experiences } from '@/data/site-data';
@@ -16,6 +16,12 @@ const iconMap: Record<string, React.ElementType> = {
 };
 
 export default function ExperienceSection() {
+  const [failedImages, setFailedImages] = useState<string[]>([]);
+
+  const markImageFailed = useCallback((image: string) => {
+    setFailedImages((prev) => (prev.includes(image) ? prev : [...prev, image]));
+  }, []);
+
   return (
     <section id={SECTION_IDS.experience} className="relative py-16 sm:py-20 lg:py-28 bg-offwhite overflow-hidden">
       {/* Subtle forest background effect */}
@@ -66,6 +72,7 @@ export default function ExperienceSection() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
           {experiences.map((exp, i) => {
             const Icon = iconMap[exp.icon] || Coffee;
+            const imageFailed = failedImages.includes(exp.image);
             return (
               <motion.div
                 key={exp.title}
@@ -78,16 +85,17 @@ export default function ExperienceSection() {
                 {/* Image */}
                 <div className="relative h-36 sm:h-48 overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-br from-warm-beige/80 to-parchment/80 flex items-center justify-center">
-                    <img
-                      src={exp.image}
-                      alt={exp.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                      loading="lazy"
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.style.display = 'none';
-                      }}
-                    />
+                    {!imageFailed && (
+                      <img
+                        src={exp.image}
+                        alt={exp.title}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                        loading="lazy"
+                        onError={() => {
+                          markImageFailed(exp.image);
+                        }}
+                      />
+                    )}
                   </div>
                   {/* Overlay gradient */}
                   <div className="absolute inset-0 bg-gradient-to-t from-offwhite/60 to-transparent" />
