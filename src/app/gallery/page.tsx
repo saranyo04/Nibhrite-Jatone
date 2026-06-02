@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { galleryImages, galleryCategories, type GalleryCategory } from '@/data/site-data';
 import { ROUTES } from '@/data/navigation-state';
+import { getGalleryImagesForCategory } from '@/lib/gallery';
 
 function getCategoryFromParam(param: string | null): GalleryCategory {
   if (!param) return 'All';
@@ -34,10 +35,7 @@ function GalleryContent() {
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [failedImageIds, setFailedImageIds] = useState<number[]>([]);
 
-  const filteredImages =
-    activeCategory === 'All'
-      ? galleryImages
-      : galleryImages.filter((img) => img.category === activeCategory);
+  const filteredImages = getGalleryImagesForCategory(activeCategory, galleryImages);
 
   const openLightbox = useCallback((index: number) => {
     setLightboxIndex(index);

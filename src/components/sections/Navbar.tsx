@@ -7,11 +7,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { navItems, siteConfig } from '@/data/site-data';
 import {
-  HOME_SCROLL_RESTORE_KEY,
-  HOME_SCROLL_RESTORE_PENDING_KEY,
   ROUTES,
   SECTION_HASHES,
-  SECTION_IDS,
 } from '@/data/navigation-state';
 
 export default function Navbar() {
@@ -30,7 +27,7 @@ export default function Navbar() {
       if (pathname !== ROUTES.home) return;
 
       const sections = navItems
-        .map((item) => item.href === ROUTES.gallery ? SECTION_IDS.gallery : item.href.startsWith('#') ? item.href.replace('#', '') : null)
+        .map((item) => item.href.startsWith('#') ? item.href.replace('#', '') : null)
         .filter((section): section is string => section !== null);
       for (let i = sections.length - 1; i >= 0; i--) {
         const el = document.getElementById(sections[i]);
@@ -50,6 +47,7 @@ export default function Navbar() {
 
   const handleNavClick = (href: string) => {
     setMobileOpen(false);
+    if (!isHomePage) return;
     const el = document.getElementById(href.replace('#', ''));
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
@@ -63,22 +61,6 @@ export default function Navbar() {
     // Section anchors: only active on homepage
     if (!isHomePage) return false;
     return activeSection === href.replace('#', '');
-  };
-
-  const isDesktopActive = (href: string) => {
-    if (isHomePage && href === ROUTES.gallery) {
-      return activeSection === SECTION_IDS.gallery;
-    }
-    return isActive(href);
-  };
-
-  const preserveHomeScrollPosition = () => {
-    if (!isHomePage) return;
-    try {
-      sessionStorage.setItem(HOME_SCROLL_RESTORE_KEY, String(window.scrollY));
-      sessionStorage.setItem(HOME_SCROLL_RESTORE_PENDING_KEY, 'true');
-    } catch {
-    }
   };
 
   return (
@@ -127,16 +109,15 @@ export default function Navbar() {
                     <Link
                       key={item.href}
                       href={item.href}
-                      onClick={item.href === ROUTES.gallery ? preserveHomeScrollPosition : undefined}
                       className={`relative px-4 py-2 text-sm font-medium transition-colors duration-300 rounded-full ${
-                        isDesktopActive(item.href)
+                        isActive(item.href)
                           ? 'text-terracotta'
                           : 'text-mud-brown/70 hover:text-terracotta'
                       }`}
                       style={{ fontFamily: 'var(--font-nunito)' }}
                     >
                       {item.label}
-                      {isDesktopActive(item.href) && (
+                      {isActive(item.href) && (
                         <motion.div
                           layoutId="activeNav"
                           className="absolute bottom-0 left-1/2 -translate-x-1/2 w-6 h-0.5 bg-terracotta rounded-full"
@@ -150,8 +131,11 @@ export default function Navbar() {
                 return (
                   <a
                     key={item.href}
-                    href={item.href}
-                    onClick={(e) => { e.preventDefault(); handleNavClick(item.href); }}
+                    href={isHomePage ? item.href : `${ROUTES.home}${item.href}`}
+                    onClick={(e) => {
+                      if (isHomePage) e.preventDefault();
+                      handleNavClick(item.href);
+                    }}
                     className={`relative px-4 py-2 text-sm font-medium transition-colors duration-300 rounded-full ${
                       isActive(item.href)
                         ? 'text-terracotta'
@@ -259,8 +243,11 @@ export default function Navbar() {
                     return (
                       <motion.a
                         key={item.href}
-                        href={item.href}
-                        onClick={(e) => { e.preventDefault(); handleNavClick(item.href); }}
+                        href={isHomePage ? item.href : `${ROUTES.home}${item.href}`}
+                        onClick={(e) => {
+                          if (isHomePage) e.preventDefault();
+                          handleNavClick(item.href);
+                        }}
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: i * 0.1 }}

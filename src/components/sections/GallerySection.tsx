@@ -4,24 +4,22 @@ import React, { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ZoomIn, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
-import { galleryImages, galleryCategories, galleryPreviewLimits, type GalleryCategory } from '@/data/site-data';
-import { HOME_SCROLL_RESTORE_PENDING_KEY, ROUTES, SECTION_IDS } from '@/data/navigation-state';
+import { galleryImages, galleryCategories, galleryPreviewLimits, type GalleryCategory, type GalleryImage } from '@/data/site-data';
+import { HOME_SCROLL_RESTORE_PENDING_KEY, SECTION_IDS } from '@/data/navigation-state';
+import { buildGalleryHref, getGalleryImagesForCategory } from '@/lib/gallery';
 
 export default function GallerySection() {
   const [activeCategory, setActiveCategory] = useState<GalleryCategory>('All');
   const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [lightboxImage, setLightboxImage] = useState<typeof galleryImages[0] | null>(null);
+  const [lightboxImage, setLightboxImage] = useState<GalleryImage | null>(null);
   const [failedImageIds, setFailedImageIds] = useState<number[]>([]);
 
-  const filteredImages =
-    activeCategory === 'All'
-      ? galleryImages
-      : galleryImages.filter((img) => img.category === activeCategory);
+  const filteredImages = getGalleryImagesForCategory(activeCategory, galleryImages);
 
   const previewLimit = galleryPreviewLimits[activeCategory];
   const previewImages = filteredImages.slice(0, previewLimit);
 
-  const openLightbox = useCallback((img: typeof galleryImages[0]) => {
+  const openLightbox = useCallback((img: GalleryImage) => {
     setLightboxImage(img);
     setLightboxOpen(true);
   }, []);
@@ -192,7 +190,7 @@ export default function GallerySection() {
           className="flex justify-center mt-8 sm:mt-10"
         >
           <Link
-            href={activeCategory === 'All' ? ROUTES.gallery : `${ROUTES.gallery}?category=${activeCategory.toLowerCase()}`}
+            href={buildGalleryHref(activeCategory)}
             onClick={markHomeScrollRestorePending}
             className="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-terracotta text-cream text-xs sm:text-sm font-medium shadow hover:bg-terracotta/90 transition-colors duration-300"
             style={{ fontFamily: 'var(--font-nunito)' }}

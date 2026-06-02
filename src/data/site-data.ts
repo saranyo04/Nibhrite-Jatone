@@ -1,4 +1,4 @@
-import { ROUTES, SECTION_HASHES } from '@/data/navigation-state';
+import { SECTION_HASHES } from '@/data/navigation-state';
 
 export const siteConfig = {
   name: "Nibhṛite Jatone",
@@ -11,7 +11,7 @@ export const siteConfig = {
 export const navItems = [
   { label: "Home", href: SECTION_HASHES.home },
   { label: "About", href: SECTION_HASHES.about },
-  { label: "Gallery", href: ROUTES.gallery },
+  { label: "Gallery", href: SECTION_HASHES.gallery },
   { label: "Experience", href: SECTION_HASHES.experience },
   { label: "Contact", href: SECTION_HASHES.contact },
 ];
@@ -127,6 +127,7 @@ export const galleryImages = [
   { id: 27, src: "/images/gallery/food/food-3.jpg", alt: "Authentic Bengali fish curry", category: "Food & Drinks" as const },
   { id: 28, src: "/images/gallery/food/food-4.jpg", alt: "Traditional Bengali sweets", category: "Food & Drinks" as const },
 ];
+export type GalleryImage = typeof galleryImages[number];
 
 export const contactLinks = {
   whatsappBaseUrl: "https://wa.me/919748318934",
