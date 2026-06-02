@@ -2,10 +2,11 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import { SECTION_IDS } from '@/data/navigation-state';
 
 export default function AboutSection() {
   return (
-    <section id="about" className="relative pt-16 pb-8 sm:pt-20 sm:pb-10 lg:pt-28 lg:pb-14 bg-offwhite">
+    <section id={SECTION_IDS.about} className="relative pt-16 pb-8 sm:pt-20 sm:pb-10 lg:pt-28 lg:pb-14 bg-offwhite">
       {/* Subtle background texture */}
       <div className="absolute inset-0 paper-texture opacity-50" />
 

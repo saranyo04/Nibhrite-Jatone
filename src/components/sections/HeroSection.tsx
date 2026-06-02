@@ -4,6 +4,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import { siteConfig } from '@/data/site-data';
+import { SECTION_IDS } from '@/data/navigation-state';
 
 function FloatingLeaf({ delay, left, duration }: { delay: number; left: string; duration: number }) {
   return (
@@ -88,7 +89,7 @@ export default function HeroSection() {
   };
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section id={SECTION_IDS.home} className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Warm Santiniketan morning gradient — earthy, peaceful, authentic */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#E8D5B7] via-[#F0E4CE] to-[#FAF7F2]" />
 

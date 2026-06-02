@@ -4,6 +4,7 @@ import React, { useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { MapPin, Phone, Mail, Clock, Navigation, MessageCircle, Send, AlertCircle } from 'lucide-react';
 import { contactInfo, contactLinks } from '@/data/site-data';
+import { SECTION_IDS } from '@/data/navigation-state';
 
 function isValidEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -42,7 +43,7 @@ export default function ContactSection() {
   const emailIsInvalid = formData.email.length > 0 && !isValidEmail(formData.email);
 
   return (
-    <section id="contact" className="relative py-16 sm:py-20 lg:py-28 bg-offwhite paper-texture">
+    <section id={SECTION_IDS.contact} className="relative py-16 sm:py-20 lg:py-28 bg-offwhite paper-texture">
       <div className="alpana-border-top mb-10 sm:mb-14 lg:mb-16" />
 
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">

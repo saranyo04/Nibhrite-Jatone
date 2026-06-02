@@ -4,6 +4,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Coffee, Footprints, Music, Utensils, Sunset, Wheat } from 'lucide-react';
 import { experiences } from '@/data/site-data';
+import { SECTION_IDS } from '@/data/navigation-state';
 
 const iconMap: Record<string, React.ElementType> = {
   coffee: Coffee,
@@ -16,7 +17,7 @@ const iconMap: Record<string, React.ElementType> = {
 
 export default function ExperienceSection() {
   return (
-    <section id="experience" className="relative py-16 sm:py-20 lg:py-28 bg-offwhite overflow-hidden">
+    <section id={SECTION_IDS.experience} className="relative py-16 sm:py-20 lg:py-28 bg-offwhite overflow-hidden">
       {/* Subtle forest background effect */}
       <div className="absolute inset-0 opacity-[0.03]">
         <svg className="w-full h-full" viewBox="0 0 800 600" preserveAspectRatio="none">
