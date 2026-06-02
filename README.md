@@ -45,7 +45,7 @@ All content lives in `src/data/site-data.ts`.
 ## Contributors
 
 - Saranyo Ray - Developer
-- Sayantan Chowdhuri — Developer
+- Sayantan Chowdhuri - Developer
 
 ## License
 
