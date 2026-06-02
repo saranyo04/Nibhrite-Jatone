@@ -14,33 +14,6 @@ export const navItems = [
   { label: "Contact", href: "#contact" },
 ];
 
-export const homeCards = [
-  {
-    title: "Homely Food",
-    bengaliTitle: "ঘরোয়া খাবার",
-    description: "Savor authentic Bengali cuisine prepared with love, fresh ingredients, and traditional recipes passed down through generations.",
-    icon: "utensils",
-  },
-  {
-    title: "Peaceful Stay",
-    bengaliTitle: "শান্ত বাস",
-    description: "Drift into serenity in our cozy rooms, where the rustle of Sal trees and gentle breezes create nature's own lullaby.",
-    icon: "bed",
-  },
-  {
-    title: "Nature Experience",
-    bengaliTitle: "প্রকৃতির অভিজ্ঞতা",
-    description: "Immerse yourself in the breathtaking beauty of Santiniketan's red soil paths, golden Sonajhuri forests, and open skies.",
-    icon: "trees",
-  },
-  {
-    title: "Cultural Soul",
-    bengaliTitle: "সাংস্কৃতিক আত্মা",
-    description: "Feel the pulse of Rabindranath Tagore's legacy, Baul music echoing through fields, and Bengal's artistic heritage all around.",
-    icon: "palette",
-  },
-];
-
 export const reviews = [
   {
     name: "Ria Bhattacharjee",
