@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Quote } from 'lucide-react';
 
 export default function AboutSection() {
   return (

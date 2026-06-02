@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { siteConfig } from '@/data/site-data';
 
 export default function HomeSection() {
   return (

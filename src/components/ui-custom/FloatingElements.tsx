@@ -39,46 +39,6 @@ function PaintStroke({ className }: { className?: string }) {
   );
 }
 
-function FloatingBaulSite({
-  className,
-  size = 50,
-  floatDuration = 14,
-  rotateRange = 3,
-  delay = 0,
-}: {
-  className?: string;
-  size?: number;
-  floatDuration?: number;
-  rotateRange?: number;
-  delay?: number;
-}) {
-  return (
-    <motion.div
-      className={`absolute pointer-events-none select-none ${className}`}
-      initial={{ opacity: 0 }}
-      animate={{
-        y: [0, -10, 0],
-        rotate: [0, rotateRange, -rotateRange, 0],
-      }}
-      transition={{
-        duration: floatDuration,
-        delay,
-        repeat: Infinity,
-        ease: 'easeInOut',
-      }}
-    >
-      <img
-        src="/images/baul-instrument.png"
-        alt="Baul instrument"
-        width={size}
-        height={Math.round(size * 1.5)}
-        className="opacity-[0.1]"
-        aria-hidden="true"
-      />
-    </motion.div>
-  );
-}
-
 export default function FloatingElements() {
   return (
     <div className="fixed inset-0 pointer-events-none z-[1] overflow-hidden">
