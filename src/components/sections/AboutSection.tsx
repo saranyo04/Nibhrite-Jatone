@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { SECTION_IDS } from '@/data/navigation-state';
 
@@ -45,10 +46,11 @@ export default function AboutSection() {
             className="relative"
           >
             <div className="relative rounded-2xl overflow-hidden warm-shadow-lg group">
-              <div className="aspect-[4/3] overflow-hidden">
-                <img
+              <div className="relative aspect-[4/3] overflow-hidden">
+                <Image
                   src="/images/about-home.jpg"
                   alt="Nibhṛite Jatone - Traditional Bengali Homestay"
+                  fill
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   loading="lazy"
                 />

@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { X, ZoomIn, ChevronLeft, ChevronRight } from 'lucide-react';
 import type { GalleryMediaItem } from '@/data/site-data';
@@ -48,9 +49,10 @@ export function GalleryImageCard({
         } bg-gradient-to-br from-warm-beige to-parchment relative${imageFailed ? ' flex items-center justify-center' : ''}`}
       >
         {!imageFailed && (
-          <img
+          <Image
             src={mediaSrc}
             alt={item.alt}
+            fill
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
             loading="lazy"
             onError={onImageError}
@@ -150,13 +152,15 @@ export function GalleryLightbox({
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.9, opacity: 0 }}
         transition={{ duration: 0.3 }}
-        className={containerClassName}
+        className={`${containerClassName} h-[85vh]`}
         onClick={(e) => e.stopPropagation()}
       >
-        <img
+        <Image
           src={mediaSrc}
           alt={item.alt}
-          className="w-full h-full object-contain"
+          fill
+          className="object-contain"
+          sizes="100vw"
         />
 
         <button

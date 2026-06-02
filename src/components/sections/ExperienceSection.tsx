@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useCallback, useState } from 'react';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Coffee, Footprints, Music, Utensils, Sunset, Wheat } from 'lucide-react';
 import { experiences } from '@/data/site-data';
@@ -86,9 +87,10 @@ export default function ExperienceSection() {
                 <div className="relative h-36 sm:h-48 overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-br from-warm-beige/80 to-parchment/80 flex items-center justify-center">
                     {!imageFailed && (
-                      <img
+                      <Image
                         src={exp.image}
                         alt={exp.title}
+                        fill
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                         loading="lazy"
                         onError={() => {
