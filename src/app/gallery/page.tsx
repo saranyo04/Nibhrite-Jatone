@@ -6,6 +6,7 @@ import { X, ZoomIn, ChevronLeft, ChevronRight, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { galleryImages, galleryCategories, type GalleryCategory } from '@/data/site-data';
+import { ROUTES } from '@/data/navigation-state';
 
 function getCategoryFromParam(param: string | null): GalleryCategory {
   if (!param) return 'All';
@@ -82,7 +83,7 @@ function GalleryContent() {
       <header className="sticky top-0 z-40 bg-cream/90 backdrop-blur-md border-b border-warm-beige/50 py-3 sm:py-4 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           <Link
-            href="/"
+            href={ROUTES.home}
             className="flex items-center gap-2 text-mud-brown/70 hover:text-terracotta transition-colors group"
           >
             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />

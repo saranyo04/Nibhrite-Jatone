@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, ZoomIn, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { galleryImages, galleryCategories, galleryPreviewLimits, type GalleryCategory } from '@/data/site-data';
+import { ROUTES, SECTION_IDS } from '@/data/navigation-state';
 
 export default function GallerySection() {
   const [activeCategory, setActiveCategory] = useState<GalleryCategory>('All');
@@ -35,7 +36,7 @@ export default function GallerySection() {
   }, []);
 
   return (
-    <section id="gallery" className="relative py-16 sm:py-20 lg:py-28 bg-cream">
+    <section id={SECTION_IDS.gallery} className="relative py-16 sm:py-20 lg:py-28 bg-cream">
       <div className="absolute inset-0 paper-texture opacity-30" />
 
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -185,7 +186,7 @@ export default function GallerySection() {
             className="flex justify-center mt-8 sm:mt-10"
           >
             <Link
-              href={`/gallery?category=${activeCategory === 'All' ? 'all' : activeCategory.toLowerCase()}`}
+              href={`${ROUTES.gallery}?category=${activeCategory === 'All' ? 'all' : activeCategory.toLowerCase()}`}
               className="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-terracotta text-cream text-xs sm:text-sm font-medium shadow hover:bg-terracotta/90 transition-colors duration-300"
               style={{ fontFamily: 'var(--font-nunito)' }}
             >

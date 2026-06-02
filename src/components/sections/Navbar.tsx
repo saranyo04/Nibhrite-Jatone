@@ -6,7 +6,12 @@ import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { navItems, siteConfig } from '@/data/site-data';
-import { HOME_SCROLL_RESTORE_KEY, HOME_SCROLL_RESTORE_PENDING_KEY } from '@/data/navigation-state';
+import {
+  HOME_SCROLL_RESTORE_KEY,
+  HOME_SCROLL_RESTORE_PENDING_KEY,
+  ROUTES,
+  SECTION_IDS,
+} from '@/data/navigation-state';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -14,17 +19,17 @@ export default function Navbar() {
   const [activeSection, setActiveSection] = useState('home');
   const pathname = usePathname();
 
-  const isHomePage = pathname === '/';
+  const isHomePage = pathname === ROUTES.home;
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
 
       // Only run section detection on homepage
-      if (pathname !== '/') return;
+      if (pathname !== ROUTES.home) return;
 
       const sections = navItems
-        .map((item) => item.href === '/gallery' ? 'gallery' : item.href.startsWith('#') ? item.href.replace('#', '') : null)
+        .map((item) => item.href === ROUTES.gallery ? SECTION_IDS.gallery : item.href.startsWith('#') ? item.href.replace('#', '') : null)
         .filter((section): section is string => section !== null);
       for (let i = sections.length - 1; i >= 0; i--) {
         const el = document.getElementById(sections[i]);
@@ -60,8 +65,8 @@ export default function Navbar() {
   };
 
   const isDesktopActive = (href: string) => {
-    if (isHomePage && href === '/gallery') {
-      return activeSection === 'gallery';
+    if (isHomePage && href === ROUTES.gallery) {
+      return activeSection === SECTION_IDS.gallery;
     }
     return isActive(href);
   };
@@ -121,7 +126,7 @@ export default function Navbar() {
                     <Link
                       key={item.href}
                       href={item.href}
-                      onClick={item.href === '/gallery' ? preserveHomeScrollPosition : undefined}
+                      onClick={item.href === ROUTES.gallery ? preserveHomeScrollPosition : undefined}
                       className={`relative px-4 py-2 text-sm font-medium transition-colors duration-300 rounded-full ${
                         isDesktopActive(item.href)
                           ? 'text-terracotta'
