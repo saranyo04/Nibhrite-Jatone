@@ -96,6 +96,23 @@ export const experiences = [
 
 export const galleryCategories = ["All", "Interior", "Exterior", "Rooms", "Food & Drinks"] as const;
 export type GalleryCategory = typeof galleryCategories[number];
+export type GalleryItemCategory = Exclude<GalleryCategory, "All">;
+export type GalleryImage = {
+  id: number;
+  type: "image";
+  src: string;
+  alt: string;
+  category: GalleryItemCategory;
+};
+export type GalleryVideo = {
+  id: number;
+  type: "video";
+  src: string;
+  alt: string;
+  category: GalleryItemCategory;
+  poster?: string;
+};
+export type GalleryMediaItem = GalleryImage | GalleryVideo;
 
 export const galleryPreviewLimits: Record<GalleryCategory, number> = {
   All: 4,
@@ -107,27 +124,26 @@ export const galleryPreviewLimits: Record<GalleryCategory, number> = {
 
 export const galleryImages = [
   // Interior (ids 1-4)
-  { id: 1, src: "/images/gallery/interior/interior-1.jpg", alt: "Cozy living room with traditional Bengali decor", category: "Interior" as const },
-  { id: 2, src: "/images/gallery/interior/interior-2.jpg", alt: "Artistic corner with terracotta pieces", category: "Interior" as const },
-  { id: 3, src: "/images/gallery/interior/interior-3.jpg", alt: "Warm reading nook with handmade crafts", category: "Interior" as const },
-  { id: 4, src: "/images/gallery/interior/interior-4.jpg", alt: "Traditional Bengali sitting area", category: "Interior" as const },
+  { id: 1, type: "image", src: "/images/gallery/interior/interior-1.jpg", alt: "Cozy living room with traditional Bengali decor", category: "Interior" },
+  { id: 2, type: "image", src: "/images/gallery/interior/interior-2.jpg", alt: "Artistic corner with terracotta pieces", category: "Interior" },
+  { id: 3, type: "image", src: "/images/gallery/interior/interior-3.jpg", alt: "Warm reading nook with handmade crafts", category: "Interior" },
+  { id: 4, type: "image", src: "/images/gallery/interior/interior-4.jpg", alt: "Traditional Bengali sitting area", category: "Interior" },
   // Exterior (ids 9-12)
-  { id: 9, src: "/images/gallery/exterior/exterior-1.jpg", alt: "Homestay surrounded by greenery", category: "Exterior" as const },
-  { id: 10, src: "/images/gallery/exterior/exterior-2.jpg", alt: "Garden path through Sal trees", category: "Exterior" as const },
-  { id: 11, src: "/images/gallery/exterior/exterior-3.jpg", alt: "Terracotta courtyard at dusk", category: "Exterior" as const },
-  { id: 12, src: "/images/gallery/exterior/exterior-4.jpg", alt: "Morning view from the veranda", category: "Exterior" as const },
+  { id: 9, type: "image", src: "/images/gallery/exterior/exterior-1.jpg", alt: "Homestay surrounded by greenery", category: "Exterior" },
+  { id: 10, type: "image", src: "/images/gallery/exterior/exterior-2.jpg", alt: "Garden path through Sal trees", category: "Exterior" },
+  { id: 11, type: "image", src: "/images/gallery/exterior/exterior-3.jpg", alt: "Terracotta courtyard at dusk", category: "Exterior" },
+  { id: 12, type: "image", src: "/images/gallery/exterior/exterior-4.jpg", alt: "Morning view from the veranda", category: "Exterior" },
   // Rooms (ids 17-20)
-  { id: 17, src: "/images/gallery/rooms/rooms-1.jpg", alt: "Elegant bedroom with earthy tones", category: "Rooms" as const },
-  { id: 18, src: "/images/gallery/rooms/rooms-2.jpg", alt: "Cozy room with window view", category: "Rooms" as const },
-  { id: 19, src: "/images/gallery/rooms/rooms-3.jpg", alt: "Traditional Bengali-style room", category: "Rooms" as const },
-  { id: 20, src: "/images/gallery/rooms/rooms-4.jpg", alt: "Peaceful room with natural light", category: "Rooms" as const },
+  { id: 17, type: "image", src: "/images/gallery/rooms/rooms-1.jpg", alt: "Elegant bedroom with earthy tones", category: "Rooms" },
+  { id: 18, type: "image", src: "/images/gallery/rooms/rooms-2.jpg", alt: "Cozy room with window view", category: "Rooms" },
+  { id: 19, type: "image", src: "/images/gallery/rooms/rooms-3.jpg", alt: "Traditional Bengali-style room", category: "Rooms" },
+  { id: 20, type: "image", src: "/images/gallery/rooms/rooms-4.jpg", alt: "Peaceful room with natural light", category: "Rooms" },
   // Food & Drinks (ids 25-28)
-  { id: 25, src: "/images/gallery/food/food-1.jpg", alt: "Traditional Bengali thali", category: "Food & Drinks" as const },
-  { id: 26, src: "/images/gallery/food/food-2.jpg", alt: "Fresh morning chai and snacks", category: "Food & Drinks" as const },
-  { id: 27, src: "/images/gallery/food/food-3.jpg", alt: "Authentic Bengali fish curry", category: "Food & Drinks" as const },
-  { id: 28, src: "/images/gallery/food/food-4.jpg", alt: "Traditional Bengali sweets", category: "Food & Drinks" as const },
-];
-export type GalleryImage = typeof galleryImages[number];
+  { id: 25, type: "image", src: "/images/gallery/food/food-1.jpg", alt: "Traditional Bengali thali", category: "Food & Drinks" },
+  { id: 26, type: "image", src: "/images/gallery/food/food-2.jpg", alt: "Fresh morning chai and snacks", category: "Food & Drinks" },
+  { id: 27, type: "image", src: "/images/gallery/food/food-3.jpg", alt: "Authentic Bengali fish curry", category: "Food & Drinks" },
+  { id: 28, type: "image", src: "/images/gallery/food/food-4.jpg", alt: "Traditional Bengali sweets", category: "Food & Drinks" },
+] satisfies readonly GalleryImage[];
 
 export const contactLinks = {
   whatsappBaseUrl: "https://wa.me/919748318934",

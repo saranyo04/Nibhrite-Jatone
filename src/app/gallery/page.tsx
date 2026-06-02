@@ -158,7 +158,7 @@ function GalleryContent() {
             {filteredImages.map((img, i) => (
               <GalleryImageCard
                 key={img.id}
-                image={img}
+                item={img}
                 index={i}
                 imageFailed={failedImageIds.includes(img.id)}
                 cardClassName="group relative rounded-xl overflow-hidden cursor-pointer warm-shadow border border-warm-beige/30 hover:border-terracotta/20 transition-all duration-500"
@@ -179,7 +179,7 @@ function GalleryContent() {
       <AnimatePresence>
         {lightboxOpen && filteredImages[lightboxIndex] && (
           <GalleryLightbox
-            image={filteredImages[lightboxIndex]}
+            item={filteredImages[lightboxIndex]}
             overlayClassName="fixed inset-0 z-[60] bg-mud-brown/90 backdrop-blur-sm flex items-center justify-center p-4"
             containerClassName="relative max-w-4xl w-full max-h-[85vh] rounded-2xl overflow-hidden warm-shadow-lg"
             closeButtonClassName="absolute top-3 right-3 sm:top-4 sm:right-4 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-cream/90 flex items-center justify-center hover:bg-cream transition-colors shadow-lg"

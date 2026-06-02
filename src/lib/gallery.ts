@@ -1,13 +1,19 @@
 import { ROUTES } from '@/data/navigation-state';
-import { galleryCategories, type GalleryCategory, type GalleryImage } from '@/data/site-data';
+import { galleryCategories, type GalleryCategory, type GalleryMediaItem } from '@/data/site-data';
 
-export function getGalleryImagesForCategory(
+export function getGalleryItemsForCategory<T extends GalleryMediaItem>(
   category: GalleryCategory,
-  images: readonly GalleryImage[],
+  items: readonly T[],
 ) {
   return category === 'All'
-    ? images
-    : images.filter((image) => image.category === category);
+    ? items
+    : items.filter((item) => item.category === category);
+}
+
+export const getGalleryImagesForCategory = getGalleryItemsForCategory;
+
+export function getGalleryMediaSrc(item: GalleryMediaItem) {
+  return item.type === 'video' && item.poster ? item.poster : item.src;
 }
 
 export function buildGalleryHref(category: GalleryCategory) {

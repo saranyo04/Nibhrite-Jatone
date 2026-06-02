@@ -11,6 +11,10 @@ import {
   SECTION_HASHES,
 } from '@/data/navigation-state';
 
+const navSectionIds = navItems
+  .map((item) => item.href.startsWith('#') ? item.href.replace('#', '') : null)
+  .filter((section): section is string => section !== null);
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -21,20 +25,19 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      const shouldBeScrolled = window.scrollY > 50;
+      setScrolled((current) => current === shouldBeScrolled ? current : shouldBeScrolled);
 
       // Only run section detection on homepage
       if (pathname !== ROUTES.home) return;
 
-      const sections = navItems
-        .map((item) => item.href.startsWith('#') ? item.href.replace('#', '') : null)
-        .filter((section): section is string => section !== null);
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const el = document.getElementById(sections[i]);
+      for (let i = navSectionIds.length - 1; i >= 0; i--) {
+        const el = document.getElementById(navSectionIds[i]);
         if (el) {
           const rect = el.getBoundingClientRect();
           if (rect.top <= 150) {
-            setActiveSection(sections[i]);
+            const nextActiveSection = navSectionIds[i];
+            setActiveSection((current) => current === nextActiveSection ? current : nextActiveSection);
             break;
           }
         }

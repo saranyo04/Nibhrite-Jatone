@@ -3,10 +3,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { X, ZoomIn, ChevronLeft, ChevronRight } from 'lucide-react';
-import type { GalleryImage } from '@/data/site-data';
+import type { GalleryMediaItem } from '@/data/site-data';
+import { getGalleryMediaSrc } from '@/lib/gallery';
 
 type GalleryImageCardProps = {
-  image: GalleryImage;
+  item: GalleryMediaItem;
   index: number;
   imageFailed: boolean;
   cardClassName: string;
@@ -18,7 +19,7 @@ type GalleryImageCardProps = {
 };
 
 export function GalleryImageCard({
-  image,
+  item,
   index,
   imageFailed,
   cardClassName,
@@ -28,9 +29,11 @@ export function GalleryImageCard({
   onClick,
   onImageError,
 }: GalleryImageCardProps) {
+  const mediaSrc = getGalleryMediaSrc(item);
+
   return (
     <motion.div
-      key={image.id}
+      key={item.id}
       layout
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
@@ -46,8 +49,8 @@ export function GalleryImageCard({
       >
         {!imageFailed && (
           <img
-            src={image.src}
-            alt={image.alt}
+            src={mediaSrc}
+            alt={item.alt}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
             loading="lazy"
             onError={onImageError}
@@ -62,7 +65,7 @@ export function GalleryImageCard({
                 <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
               </svg>
             </div>
-            <p style={{ fontFamily: 'var(--font-cormorant)', color: 'rgba(107,79,58,0.3)', fontSize: '12px' }}>{image.category}</p>
+            <p style={{ fontFamily: 'var(--font-cormorant)', color: 'rgba(107,79,58,0.3)', fontSize: '12px' }}>{item.category}</p>
           </div>
         )}
       </div>
@@ -73,7 +76,7 @@ export function GalleryImageCard({
             className="text-xs text-cream/80"
             style={{ fontFamily: 'var(--font-nunito)' }}
           >
-            {image.alt}
+            {item.alt}
           </p>
         </div>
       </div>
@@ -88,7 +91,7 @@ export function GalleryImageCard({
             className="px-2 py-1 text-[10px] rounded-full bg-cream/80 backdrop-blur-sm text-terracotta/70 font-medium"
             style={{ fontFamily: 'var(--font-nunito)' }}
           >
-            {image.category}
+            {item.category}
           </span>
         </div>
       )}
@@ -97,7 +100,7 @@ export function GalleryImageCard({
 }
 
 type GalleryLightboxProps = {
-  image: GalleryImage;
+  item: GalleryMediaItem;
   overlayClassName: string;
   containerClassName: string;
   closeButtonClassName: string;
@@ -112,7 +115,7 @@ type GalleryLightboxProps = {
 };
 
 export function GalleryLightbox({
-  image,
+  item,
   overlayClassName,
   containerClassName,
   closeButtonClassName,
@@ -120,6 +123,8 @@ export function GalleryLightbox({
   onClose,
   navigation,
 }: GalleryLightboxProps) {
+  const mediaSrc = getGalleryMediaSrc(item);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -140,7 +145,7 @@ export function GalleryLightbox({
       )}
 
       <motion.div
-        key={image.id}
+        key={item.id}
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.9, opacity: 0 }}
@@ -149,8 +154,8 @@ export function GalleryLightbox({
         onClick={(e) => e.stopPropagation()}
       >
         <img
-          src={image.src}
-          alt={image.alt}
+          src={mediaSrc}
+          alt={item.alt}
           className="w-full h-full object-contain"
         />
 
@@ -167,13 +172,13 @@ export function GalleryLightbox({
             className="text-sm text-cream/90"
             style={{ fontFamily: 'var(--font-nunito)' }}
           >
-            {image.alt}
+            {item.alt}
           </p>
           <p
             className="text-xs text-cream/50 mt-1"
             style={{ fontFamily: 'var(--font-nunito)' }}
           >
-            {image.category}
+            {item.category}
           </p>
         </div>
       </motion.div>
