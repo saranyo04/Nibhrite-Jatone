@@ -93,6 +93,7 @@ export default function ExperienceSection() {
                         fill
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                         loading="lazy"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         onError={() => {
                           markImageFailed(exp.image);
                         }}

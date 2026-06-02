@@ -55,6 +55,7 @@ export function GalleryImageCard({
             fill
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
             loading="lazy"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             onError={onImageError}
           />
         )}
@@ -145,48 +146,42 @@ export function GalleryLightbox({
           <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 text-mud-brown" />
         </button>
       )}
-
       <motion.div
         key={item.id}
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.9, opacity: 0 }}
         transition={{ duration: 0.3 }}
-        className={`${containerClassName} h-[85vh]`}
+        className={`${containerClassName} !w-auto !h-auto shadow-2xl ring-1 ring-white/10`}
         onClick={(e) => e.stopPropagation()}
       >
-        <Image
+        <img
           src={mediaSrc}
           alt={item.alt}
-          fill
-          className="object-contain"
-          sizes="100vw"
+          className="block max-h-[85vh] max-w-[calc(100vw-1rem)] sm:max-w-[calc(100vw-2rem)] w-auto h-auto object-contain"
         />
-
         <button
           onClick={onClose}
-          className={closeButtonClassName}
+          className={`${closeButtonClassName} z-10`}
           aria-label="Close lightbox"
         >
           <X className={closeIconClassName} />
         </button>
-
-        <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-mud-brown/80 to-transparent">
+        <div className="absolute bottom-0 left-0 right-0 px-4 pb-4 pt-12 bg-gradient-to-t from-black/70 via-black/30 to-transparent pointer-events-none">
           <p
-            className="text-sm text-cream/90"
+            className="text-sm font-medium text-white drop-shadow"
             style={{ fontFamily: 'var(--font-nunito)' }}
           >
             {item.alt}
           </p>
           <p
-            className="text-xs text-cream/50 mt-1"
+            className="text-xs text-white/60 mt-0.5"
             style={{ fontFamily: 'var(--font-nunito)' }}
           >
             {item.category}
           </p>
         </div>
       </motion.div>
-
       {navigation && (
         <>
           <button
@@ -196,8 +191,8 @@ export function GalleryLightbox({
           >
             <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 text-mud-brown" />
           </button>
-
-          <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 px-3 py-1.5 rounded-full bg-cream/80 backdrop-blur-sm text-xs text-mud-brown/70 font-medium z-10"
+          <div
+            className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 px-3 py-1.5 rounded-full bg-cream/80 backdrop-blur-sm text-xs text-mud-brown/70 font-medium z-10"
             style={{ fontFamily: 'var(--font-nunito)' }}
           >
             {navigation.current} / {navigation.total}

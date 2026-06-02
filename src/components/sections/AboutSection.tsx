@@ -53,6 +53,7 @@ export default function AboutSection() {
                   fill
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   loading="lazy"
+                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
               </div>
               {/* Decorative corner frame */}
