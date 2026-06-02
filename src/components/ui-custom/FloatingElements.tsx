@@ -1,7 +1,12 @@
 'use client';
 
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect } from 'react';
+import { motion, useAnimationControls, useReducedMotion } from 'framer-motion';
+
+const dotAnimation = {
+  y: [0, -20, 0],
+  opacity: [0.1, 0.25, 0.1],
+};
 
 function TerracottaMotif({ className }: { className?: string }) {
   return (
@@ -40,6 +45,29 @@ function PaintStroke({ className }: { className?: string }) {
 }
 
 export default function FloatingElements() {
+  const prefersReducedMotion = useReducedMotion() === true;
+  const controls = useAnimationControls();
+
+  useEffect(() => {
+    if (prefersReducedMotion) {
+      controls.stop();
+      return;
+    }
+
+    controls.start(dotAnimation);
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        controls.stop();
+      } else {
+        controls.start(dotAnimation);
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
+  }, [controls, prefersReducedMotion]);
+
   return (
     <div className="fixed inset-0 pointer-events-none z-[1] overflow-hidden">
       {/* Terracotta motifs */}
@@ -72,11 +100,9 @@ export default function FloatingElements() {
           style={{
             left: `${dot.left}%`,
             top: `${dot.top}%`,
+            willChange: "transform",
           }}
-          animate={{
-            y: [0, -20, 0],
-            opacity: [0.1, 0.25, 0.1],
-          }}
+          animate={prefersReducedMotion ? {} : controls}
           transition={{
             duration: dot.duration,
             delay: dot.delay,

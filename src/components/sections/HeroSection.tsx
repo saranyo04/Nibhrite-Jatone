@@ -1,23 +1,72 @@
 'use client';
 
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect } from 'react';
+import { motion, useAnimationControls, useReducedMotion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import { siteConfig } from '@/data/site-data';
 import { SECTION_IDS } from '@/data/navigation-state';
 
-function FloatingLeaf({ delay, left, duration }: { delay: number; left: string; duration: number }) {
+const leafAnimation = {
+  opacity: [0, 0.8, 0.7, 0],
+  y: ['0%', '110%'],
+  rotate: [0, 180, 360],
+  x: [0, 30, -20, 10],
+};
+
+const birdAnimation = { x: '110%', opacity: [0, 0.35, 0.35, 0] };
+
+const particleAnimation = {
+  opacity: [0.1, 0.4, 0.1],
+  scale: [1, 1.5, 1],
+  y: [0, -15, 0],
+};
+
+const instrumentAnimation = {
+  y: [0, -10, 0],
+  rotate: [0, -4, 4, 0],
+};
+
+const scrollChevronAnimation = { y: [0, 8, 0] };
+
+function FloatingLeaf({
+  delay,
+  left,
+  duration,
+  prefersReducedMotion,
+}: {
+  delay: number;
+  left: string;
+  duration: number;
+  prefersReducedMotion: boolean;
+}) {
+  const controls = useAnimationControls();
+
+  useEffect(() => {
+    if (prefersReducedMotion) {
+      controls.stop();
+      return;
+    }
+
+    controls.start(leafAnimation);
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        controls.stop();
+      } else {
+        controls.start(leafAnimation);
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
+  }, [controls, prefersReducedMotion]);
+
   return (
     <motion.div
       className="absolute pointer-events-none select-none"
-      style={{ left, top: '-5%' }}
+      style={{ left, top: '-5%', willChange: "transform" }}
       initial={{ opacity: 0, y: -20, rotate: 0 }}
-      animate={{
-        opacity: [0, 0.8, 0.7, 0],
-        y: ['0%', '110%'],
-        rotate: [0, 180, 360],
-        x: [0, 30, -20, 10],
-      }}
+      animate={prefersReducedMotion ? {} : controls}
       transition={{
         duration,
         delay,
@@ -37,13 +86,43 @@ function FloatingLeaf({ delay, left, duration }: { delay: number; left: string; 
   );
 }
 
-function BirdSilhouette({ delay, top }: { delay: number; top: string }) {
+function BirdSilhouette({
+  delay,
+  top,
+  prefersReducedMotion,
+}: {
+  delay: number;
+  top: string;
+  prefersReducedMotion: boolean;
+}) {
+  const controls = useAnimationControls();
+
+  useEffect(() => {
+    if (prefersReducedMotion) {
+      controls.stop();
+      return;
+    }
+
+    controls.start(birdAnimation);
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        controls.stop();
+      } else {
+        controls.start(birdAnimation);
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
+  }, [controls, prefersReducedMotion]);
+
   return (
     <motion.div
       className="absolute pointer-events-none select-none"
-      style={{ top, left: '-10%' }}
+      style={{ top, left: '-10%', willChange: "transform" }}
       initial={{ x: '-10%', opacity: 0 }}
-      animate={{ x: '110%', opacity: [0, 0.35, 0.35, 0] }}
+      animate={prefersReducedMotion ? {} : controls}
       transition={{
         duration: 28,
         delay,
@@ -83,6 +162,29 @@ function AlpanaDecoration({ className }: { className?: string }) {
 }
 
 export default function HeroSection() {
+  const prefersReducedMotion = useReducedMotion() === true;
+  const particleControls = useAnimationControls();
+
+  useEffect(() => {
+    if (prefersReducedMotion) {
+      particleControls.stop();
+      return;
+    }
+
+    particleControls.start(particleAnimation);
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        particleControls.stop();
+      } else {
+        particleControls.start(particleAnimation);
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
+  }, [particleControls, prefersReducedMotion]);
+
   const handleScroll = (id: string) => {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -110,15 +212,15 @@ export default function HeroSection() {
       </div>
 
       {/* Floating decorative elements */}
-      <FloatingLeaf delay={0} left="10%" duration={18} />
-      <FloatingLeaf delay={3} left="30%" duration={22} />
-      <FloatingLeaf delay={7} left="55%" duration={16} />
-      <FloatingLeaf delay={11} left="75%" duration={20} />
-      <FloatingLeaf delay={5} left="90%" duration={24} />
+      <FloatingLeaf delay={0} left="10%" duration={18} prefersReducedMotion={prefersReducedMotion} />
+      <FloatingLeaf delay={3} left="30%" duration={22} prefersReducedMotion={prefersReducedMotion} />
+      <FloatingLeaf delay={7} left="55%" duration={16} prefersReducedMotion={prefersReducedMotion} />
+      <FloatingLeaf delay={11} left="75%" duration={20} prefersReducedMotion={prefersReducedMotion} />
+      <FloatingLeaf delay={5} left="90%" duration={24} prefersReducedMotion={prefersReducedMotion} />
 
-      <BirdSilhouette delay={0} top="15%" />
-      <BirdSilhouette delay={8} top="25%" />
-      <BirdSilhouette delay={15} top="20%" />
+      <BirdSilhouette delay={0} top="15%" prefersReducedMotion={prefersReducedMotion} />
+      <BirdSilhouette delay={8} top="25%" prefersReducedMotion={prefersReducedMotion} />
+      <BirdSilhouette delay={15} top="20%" prefersReducedMotion={prefersReducedMotion} />
 
       {/* Alpana decorations — visible only on xl screens */}
       <AlpanaDecoration className="top-[15%] left-[5%] hidden xl:block" />
@@ -141,12 +243,9 @@ export default function HeroSection() {
           style={{
             left: `${particle.left}%`,
             top: `${particle.top}%`,
+            willChange: "transform",
           }}
-          animate={{
-            opacity: [0.1, 0.4, 0.1],
-            scale: [1, 1.5, 1],
-            y: [0, -15, 0],
-          }}
+          animate={prefersReducedMotion ? {} : particleControls}
           transition={{
             duration: particle.duration,
             delay: particle.delay,
@@ -166,16 +265,14 @@ export default function HeroSection() {
           className="flex justify-center mb-6"
         >
           <motion.div
-            animate={{
-              y: [0, -10, 0],
-              rotate: [0, -4, 4, 0],
-            }}
+            animate={prefersReducedMotion ? {} : instrumentAnimation}
             transition={{
               duration: 14,
               repeat: Infinity,
               ease: 'easeInOut',
             }}
             className="-scale-x-100"
+            style={{ willChange: "transform" }}
           >
             <img
               src="/images/baul-instrument.png"
@@ -278,9 +375,10 @@ export default function HeroSection() {
         className="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center"
       >
         <motion.div
-          animate={{ y: [0, 8, 0] }}
+          animate={prefersReducedMotion ? {} : scrollChevronAnimation}
           transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
           className="flex flex-col items-center"
+          style={{ willChange: "transform" }}
         >
           <ChevronDown className="w-5 h-5 text-mud-brown/35" />
           <ChevronDown className="w-5 h-5 text-mud-brown/25 -mt-2" />

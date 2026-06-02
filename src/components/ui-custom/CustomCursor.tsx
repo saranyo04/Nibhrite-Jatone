@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { motion, useMotionValue, useSpring } from 'framer-motion';
+import { motion, useMotionValue, useReducedMotion, useSpring } from 'framer-motion';
 
 const outerSpring = {
   stiffness: 150,
@@ -16,6 +16,7 @@ const innerSpring = {
 };
 
 export default function CustomCursor() {
+  const prefersReducedMotion = useReducedMotion();
   const [isMobile, setIsMobile] = useState(false);
   const outerXTarget = useMotionValue(-16);
   const outerYTarget = useMotionValue(-16);
@@ -95,6 +96,7 @@ export default function CustomCursor() {
           y: outerY,
           scale: outerScale,
           opacity: outerOpacity,
+          willChange: "transform",
         }}
       />
       {/* Inner dot */}
@@ -104,6 +106,7 @@ export default function CustomCursor() {
           x: innerX,
           y: innerY,
           opacity: innerOpacity,
+          willChange: "transform",
         }}
       />
     </>
