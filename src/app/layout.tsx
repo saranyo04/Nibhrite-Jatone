@@ -1,4 +1,6 @@
 ﻿import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Cormorant_Garamond, Nunito, Noto_Serif_Bengali } from "next/font/google";
 import { contactInfo, contactLinks, siteConfig } from "@/data/site-data";
 import "./globals.css";
@@ -109,6 +111,8 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
         {children}
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
