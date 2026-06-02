@@ -1,6 +1,6 @@
 ﻿import type { Metadata } from "next";
 import { Cormorant_Garamond, Nunito, Noto_Serif_Bengali } from "next/font/google";
-import { siteConfig } from "@/data/site-data";
+import { contactInfo, contactLinks, siteConfig } from "@/data/site-data";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
@@ -24,14 +24,30 @@ const notoBengali = Noto_Serif_Bengali({
   display: "swap",
 });
 
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "BedAndBreakfast",
+  name: siteConfig.name,
+  description: siteConfig.tagline,
+  url: siteConfig.siteUrl,
+  image: new URL(siteConfig.ogImage, siteConfig.siteUrl).toString(),
+  address: contactInfo.address,
+  telephone: contactInfo.phone,
+  email: contactInfo.email,
+  sameAs: [
+    contactLinks.instagramUrl,
+    contactLinks.facebookUrl,
+  ],
+};
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.siteUrl),
   title: {
     default: `${siteConfig.name} | ${siteConfig.bengaliName} — A Soulful Homestay in Santiniketan`,
     template: `%s | ${siteConfig.name}`,
   },
   applicationName: siteConfig.name,
-  description:
-    `Discover peace in the heart of Santiniketan. ${siteConfig.name} offers a soulful homestay experience surrounded by Sonajhuri forests, Baul culture, and authentic Bengali hospitality.`,
+  description: siteConfig.seoDescription,
   keywords: [
     "Santiniketan homestay",
     "Bengali culture",
@@ -49,19 +65,31 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  alternates: {
+    canonical: siteConfig.siteUrl,
+  },
   openGraph: {
     title: `${siteConfig.name} — A Soulful Homestay in Santiniketan`,
     description:
       `${siteConfig.bengaliTagline} — Experience authentic Bengali hospitality in the heart of Santiniketan`,
+    url: siteConfig.siteUrl,
     siteName: siteConfig.name,
+    images: [
+      {
+        url: siteConfig.ogImage,
+        width: 1200,
+        height: 630,
+        alt: siteConfig.name,
+      },
+    ],
     type: "website",
     locale: "bn_IN",
   },
   twitter: {
     card: "summary",
     title: `${siteConfig.name} — A Soulful Homestay in Santiniketan`,
-    description:
-      `Discover peace in the heart of Santiniketan. ${siteConfig.name} offers a soulful homestay experience surrounded by Sonajhuri forests, Baul culture, and authentic Bengali hospitality.`,
+    description: siteConfig.seoDescription,
+    images: [siteConfig.ogImage],
   },
 };
 
@@ -71,11 +99,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="bn" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <body
         suppressHydrationWarning
         className={`${cormorant.variable} ${nunito.variable} ${notoBengali.variable} antialiased bg-background text-foreground`}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
         {children}
       </body>
     </html>

@@ -2,8 +2,11 @@ import { SECTION_HASHES } from '@/data/navigation-state';
 
 export const siteConfig = {
   name: "Nibhṛite Jatone",
+  siteUrl: "https://nibhritejatone.in",
+  ogImage: "/images/og-image.jpg",
   bengaliName: "নিভৃতে যতনে",
   tagline: "A soulful homestay experience in the heart of Santiniketan",
+  seoDescription: "Discover peace in the heart of Santiniketan. Nibhṛite Jatone offers a soulful homestay experience surrounded by Sonajhuri forests, Baul culture, and authentic Bengali hospitality.",
   bengaliTagline: "শান্তির আশ্রয়, প্রকৃতির কোলে",
   heroQuote: "নিভৃতে যতনে, প্রকৃতির কোলে শান্তির আশ্রয়",
 };
