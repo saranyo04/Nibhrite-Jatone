@@ -16,9 +16,8 @@ import FloatingElements from '@/components/ui-custom/FloatingElements';
 import ScrollToTop from '@/components/ui-custom/ScrollToTop';
 import WhatsAppButton from '@/components/ui-custom/WhatsAppButton';
 import SectionDivider from '@/components/ui-custom/SectionDivider';
+import { HOME_SCROLL_RESTORE_KEY, HOME_SCROLL_RESTORE_PENDING_KEY } from '@/data/navigation-state';
 
-const HOME_SCROLL_RESTORE_KEY = 'nibhrite-home-scroll-y';
-const HOME_SCROLL_RESTORE_PENDING_KEY = 'nibhrite-home-scroll-restore-pending';
 const HOME_SCROLL_SAVE_INTERVAL_MS = 200;
 
 export default function Home() {

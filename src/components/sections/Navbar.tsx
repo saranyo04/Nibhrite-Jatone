@@ -6,9 +6,7 @@ import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { navItems, siteConfig } from '@/data/site-data';
-
-const HOME_SCROLL_RESTORE_KEY = 'nibhrite-home-scroll-y';
-const HOME_SCROLL_RESTORE_PENDING_KEY = 'nibhrite-home-scroll-restore-pending';
+import { HOME_SCROLL_RESTORE_KEY, HOME_SCROLL_RESTORE_PENDING_KEY } from '@/data/navigation-state';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
